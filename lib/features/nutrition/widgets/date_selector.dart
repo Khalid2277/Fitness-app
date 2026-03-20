@@ -27,8 +27,9 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
   static const int _totalDays = _pastDays + 1 + _futureDays; // +1 for today
   static const int _todayIndex = _pastDays;
 
-  static const double _itemWidth = 50.0;
-  static const double _itemSpacing = 8.0; // AppSpacing.sm
+  static const double _itemWidth = 52.0;
+  static const double _itemSpacing = 10.0;
+  static const double _todayDotSize = 6.0;
 
   late final ScrollController _scrollController;
   late final DateTime _baseDate; // today
@@ -104,29 +105,64 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
     final selectedDate = ref.watch(selectedDateProvider);
 
     return SizedBox(
-      height: 76,
+      height: 86,
       child: ListView.separated(
         controller: _scrollController,
         scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
         padding: AppSpacing.screenPadding,
         itemCount: _totalDays,
         separatorBuilder: (_, index) {
           // Add month divider when crossing month boundaries
           if (index + 1 < _totalDays && _isFirstOfMonth(index + 1)) {
+            final nextDate = _dateAtIndex(index + 1);
+            final monthLabel = DateFormat('MMM').format(nextDate).toUpperCase();
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: Center(
-                child: Container(
-                  width: 1,
-                  height: 32,
-                  color: isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : AppColors.dividerLight,
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    monthLabel,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: isDark
+                          ? AppColors.textTertiaryDark
+                          : AppColors.textTertiaryLight,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 9,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  Container(
+                    width: 1,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          (isDark
+                                  ? Colors.white
+                                  : AppColors.textTertiaryLight)
+                              .withValues(alpha: 0.0),
+                          (isDark
+                                  ? Colors.white
+                                  : AppColors.textTertiaryLight)
+                              .withValues(alpha: 0.15),
+                          (isDark
+                                  ? Colors.white
+                                  : AppColors.textTertiaryLight)
+                              .withValues(alpha: 0.0),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
           }
-          return const SizedBox(width: AppSpacing.sm);
+          return SizedBox(width: _itemSpacing);
         },
         itemBuilder: (context, index) {
           final date = _dateAtIndex(index);
@@ -148,27 +184,38 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
               curve: Curves.easeInOut,
               width: _itemWidth,
               decoration: BoxDecoration(
+                gradient: isSelected ? AppColors.primaryGradient : null,
                 color: isSelected
-                    ? AppColors.primaryBlue
+                    ? null
                     : isDark
                         ? AppColors.surfaceDark1
                         : AppColors.surfaceLight1,
                 borderRadius: AppSpacing.borderRadiusMd,
                 border: isToday && !isSelected
                     ? Border.all(
-                        color: AppColors.primaryBlue.withValues(alpha: 0.4),
+                        color: AppColors.primaryBlue.withValues(alpha: 0.5),
                         width: 1.5,
                       )
                     : Border.all(
                         color: isSelected
                             ? Colors.transparent
                             : isDark
-                                ? AppColors.dividerDark
-                                : AppColors.dividerLight,
+                                ? AppColors.dividerDark.withValues(alpha: 0.5)
+                                : AppColors.dividerLight.withValues(alpha: 0.6),
                       ),
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color: AppColors.primaryBlue.withValues(alpha: isDark ? 0.35 : 0.25),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                          spreadRadius: -2,
+                        ),
+                      ]
+                    : null,
               ),
               child: Opacity(
-                opacity: isFuture ? 0.3 : 1.0,
+                opacity: isFuture ? 0.35 : 1.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -176,13 +223,13 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
                       dayName.toUpperCase(),
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: isSelected
-                            ? theme.colorScheme.onPrimary.withValues(alpha: 0.8)
+                            ? Colors.white.withValues(alpha: 0.85)
                             : isDark
                                 ? AppColors.textTertiaryDark
                                 : AppColors.textTertiaryLight,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         fontSize: 10,
-                        letterSpacing: 0.5,
+                        letterSpacing: 0.8,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.xs),
@@ -190,21 +237,40 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
                       dayNum,
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: isSelected
-                            ? theme.colorScheme.onPrimary
-                            : theme.colorScheme.onSurface,
+                            ? Colors.white
+                            : isFuture
+                                ? (isDark
+                                    ? AppColors.textDisabledDark
+                                    : AppColors.textDisabledLight)
+                                : theme.colorScheme.onSurface,
                         fontWeight: FontWeight.w700,
+                        decoration: isFuture ? TextDecoration.lineThrough : null,
+                        decorationColor: isDark
+                            ? AppColors.textDisabledDark
+                            : AppColors.textDisabledLight,
+                        decorationStyle: TextDecorationStyle.solid,
                       ),
                     ),
                     if (isToday) ...[
                       const SizedBox(height: AppSpacing.xs),
                       Container(
-                        width: 5,
-                        height: 5,
+                        width: _todayDotSize,
+                        height: _todayDotSize,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: isSelected
-                              ? theme.colorScheme.onPrimary
+                              ? Colors.white
                               : AppColors.primaryBlue,
+                          boxShadow: [
+                            BoxShadow(
+                              color: (isSelected
+                                      ? Colors.white
+                                      : AppColors.primaryBlue)
+                                  .withValues(alpha: 0.5),
+                              blurRadius: 6,
+                              spreadRadius: 1,
+                            ),
+                          ],
                         ),
                       ),
                     ],

@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -249,7 +249,7 @@ class _PremiumAppBar extends StatelessWidget {
 
     return ClipRRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        filter: ui.ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
           padding: EdgeInsets.fromLTRB(
             AppSpacing.sm,
@@ -311,11 +311,18 @@ class _PremiumAppBar extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'AI Coach',
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: -0.3,
+                        ShaderMask(
+                          shaderCallback: (bounds) =>
+                              AppColors.primaryGradient.createShader(
+                            Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                          ),
+                          child: Text(
+                            'AI Coach',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: -0.3,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 1),
@@ -623,25 +630,45 @@ class _WelcomeView extends StatelessWidget {
         children: [
           const SizedBox(height: AppSpacing.xxxxl),
 
-          // ── Animated AI avatar ─────────────────────────────────────────
+          // ── Animated AI avatar with premium gradient ring ──────────────
           Container(
-            width: 88,
-            height: 88,
+            width: 96,
+            height: 96,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: AppColors.primaryGradient,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primaryBlue.withValues(alpha: 0.3),
-                  blurRadius: 24,
+                  color: AppColors.primaryBlue.withValues(alpha: 0.35),
+                  blurRadius: 32,
+                  spreadRadius: 2,
                   offset: const Offset(0, 8),
+                ),
+                BoxShadow(
+                  color: AppColors.primaryBlue.withValues(alpha: 0.15),
+                  blurRadius: 60,
+                  spreadRadius: 8,
                 ),
               ],
             ),
-            child: const Icon(
-              Icons.auto_awesome_rounded,
-              size: 40,
-              color: Colors.white,
+            child: Container(
+              margin: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isDark ? AppColors.surfaceDark1 : AppColors.surfaceLight,
+              ),
+              child: Container(
+                margin: const EdgeInsets.all(4),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: AppColors.primaryGradient,
+                ),
+                child: const Icon(
+                  Icons.auto_awesome_rounded,
+                  size: 36,
+                  color: Colors.white,
+                ),
+              ),
             ),
           )
               .animate(
@@ -656,12 +683,19 @@ class _WelcomeView extends StatelessWidget {
 
           const SizedBox(height: AppSpacing.xxl),
 
-          // ── Headline ─────────────────────────────────────────────────
-          Text(
-            'Your Personal AI Coach',
-            style: theme.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w800,
-              letterSpacing: -0.5,
+          // ── Headline with gradient ─────────────────────────────────────
+          ShaderMask(
+            shaderCallback: (bounds) =>
+                AppColors.primaryGradient.createShader(
+              Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+            ),
+            child: Text(
+              'Your Personal AI Coach',
+              style: theme.textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+                letterSpacing: -0.5,
+                color: Colors.white,
+              ),
             ),
           )
               .animate()
@@ -791,19 +825,45 @@ class _SuggestionCard extends StatelessWidget {
           color: isDark ? AppColors.surfaceDark1 : AppColors.surfaceLight,
           borderRadius: AppSpacing.borderRadiusMd,
           border: Border.all(
-            color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+            color: color.withValues(alpha: isDark ? 0.2 : 0.15),
             width: 0.5,
           ),
-          boxShadow: isDark ? null : AppColors.cardShadowLight,
+          boxShadow: isDark
+              ? [
+                  BoxShadow(
+                    color: color.withValues(alpha: 0.06),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : [
+                  ...AppColors.cardShadowLight,
+                  BoxShadow(
+                    color: color.withValues(alpha: 0.06),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
         ),
         child: Row(
           children: [
             Container(
-              width: 36,
-              height: 36,
+              width: 38,
+              height: 38,
               decoration: BoxDecoration(
-                color: color.withValues(alpha: isDark ? 0.15 : 0.1),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    color.withValues(alpha: isDark ? 0.2 : 0.12),
+                    color.withValues(alpha: isDark ? 0.1 : 0.05),
+                  ],
+                ),
                 borderRadius: AppSpacing.borderRadiusSm,
+                border: Border.all(
+                  color: color.withValues(alpha: isDark ? 0.15 : 0.1),
+                  width: 0.5,
+                ),
               ),
               child: Icon(icon, size: 18, color: color),
             ),
@@ -816,10 +876,18 @@ class _SuggestionCard extends StatelessWidget {
                 ),
               ),
             ),
-            Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: 14,
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.25),
+            Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: isDark ? 0.1 : 0.06),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 11,
+                color: color.withValues(alpha: 0.7),
+              ),
             ),
           ],
         ),
@@ -832,7 +900,7 @@ class _SuggestionCard extends StatelessWidget {
 // Frosted Glass Input Bar
 // ═══════════════════════════════════════════════════════════════════════════════
 
-class _FrostedInputBar extends StatelessWidget {
+class _FrostedInputBar extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final bool hasText;
@@ -850,19 +918,42 @@ class _FrostedInputBar extends StatelessWidget {
   });
 
   @override
+  State<_FrostedInputBar> createState() => _FrostedInputBarState();
+}
+
+class _FrostedInputBarState extends State<_FrostedInputBar> {
+  bool _isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.focusNode.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    widget.focusNode.removeListener(_onFocusChange);
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    setState(() => _isFocused = widget.focusNode.hasFocus);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
     return ClipRRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+        filter: ui.ImageFilter.blur(sigmaX: 30, sigmaY: 30),
         child: Container(
           padding: EdgeInsets.fromLTRB(
             AppSpacing.md,
             AppSpacing.md,
             AppSpacing.md,
-            AppSpacing.md + (bottomPadding > 0 ? bottomPadding : AppSpacing.sm),
+            AppSpacing.md + (widget.bottomPadding > 0 ? widget.bottomPadding : AppSpacing.sm),
           ),
           decoration: BoxDecoration(
             color: isDark
@@ -886,7 +977,7 @@ class _FrostedInputBar extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     Haptics.light();
-                    onScanFood();
+                    widget.onScanFood();
                   },
                   child: Container(
                     width: 40,
@@ -916,9 +1007,11 @@ class _FrostedInputBar extends StatelessWidget {
 
               const SizedBox(width: AppSpacing.sm),
 
-              // ── Text field ───────────────────────────────────────────
+              // ── Text field with gradient border on focus ──────────────
               Expanded(
-                child: Container(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeInOut,
                   constraints: const BoxConstraints(
                     minHeight: 42,
                     maxHeight: 140,
@@ -929,16 +1022,39 @@ class _FrostedInputBar extends StatelessWidget {
                         : Colors.black.withValues(alpha: 0.03),
                     borderRadius:
                         BorderRadius.circular(AppSpacing.radiusXl),
-                    border: Border.all(
-                      color: isDark
-                          ? Colors.white.withValues(alpha: 0.08)
-                          : Colors.black.withValues(alpha: 0.08),
-                      width: 0.5,
-                    ),
+                    border: _isFocused
+                        ? null
+                        : Border.all(
+                            color: isDark
+                                ? Colors.white.withValues(alpha: 0.08)
+                                : Colors.black.withValues(alpha: 0.08),
+                            width: 0.5,
+                          ),
+                    gradient: _isFocused ? null : null,
+                    boxShadow: _isFocused
+                        ? [
+                            BoxShadow(
+                              color: AppColors.primaryBlue
+                                  .withValues(alpha: isDark ? 0.2 : 0.12),
+                              blurRadius: 12,
+                              spreadRadius: 0,
+                            ),
+                          ]
+                        : null,
                   ),
+                  foregroundDecoration: _isFocused
+                      ? BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(AppSpacing.radiusXl),
+                          border: GradientBoxBorder(
+                            gradient: AppColors.primaryGradient,
+                            borderWidth: 1.5,
+                          ),
+                        )
+                      : null,
                   child: TextField(
-                    controller: controller,
-                    focusNode: focusNode,
+                    controller: widget.controller,
+                    focusNode: widget.focusNode,
                     style: theme.textTheme.bodyMedium,
                     textInputAction: TextInputAction.newline,
                     keyboardType: TextInputType.multiline,
@@ -963,48 +1079,58 @@ class _FrostedInputBar extends StatelessWidget {
 
               const SizedBox(width: AppSpacing.sm),
 
-              // ── Send button ──────────────────────────────────────────
+              // ── Gradient send button ─────────────────────────────────
               Padding(
                 padding: const EdgeInsets.only(bottom: 1),
                 child: GestureDetector(
                   onTap: () {
-                    if (hasText) {
+                    if (widget.hasText) {
                       Haptics.light();
-                      onSend();
+                      widget.onSend();
                     }
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    width: 40,
-                    height: 40,
+                    width: 42,
+                    height: 42,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient:
-                          hasText ? AppColors.primaryGradient : null,
-                      color: hasText
+                          widget.hasText ? AppColors.primaryGradient : null,
+                      color: widget.hasText
                           ? null
                           : (isDark
                               ? Colors.white.withValues(alpha: 0.06)
                               : Colors.black.withValues(alpha: 0.06)),
-                      boxShadow: hasText
+                      boxShadow: widget.hasText
                           ? [
                               BoxShadow(
                                 color: AppColors.primaryBlue
-                                    .withValues(alpha: 0.35),
-                                blurRadius: 8,
-                                offset: const Offset(0, 2),
+                                    .withValues(alpha: 0.4),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                              BoxShadow(
+                                color: AppColors.primaryBlue
+                                    .withValues(alpha: 0.15),
+                                blurRadius: 4,
+                                offset: const Offset(0, 1),
                               ),
                             ]
                           : null,
                     ),
-                    child: Icon(
-                      Icons.arrow_upward_rounded,
-                      size: 20,
-                      color: hasText
-                          ? Colors.white
-                          : (isDark
-                              ? AppColors.textTertiaryDark
-                              : AppColors.textTertiaryLight),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: Icon(
+                        Icons.arrow_upward_rounded,
+                        key: ValueKey(widget.hasText),
+                        size: 21,
+                        color: widget.hasText
+                            ? Colors.white
+                            : (isDark
+                                ? AppColors.textTertiaryDark
+                                : AppColors.textTertiaryLight),
+                      ),
                     ),
                   ),
                 ),
@@ -1014,6 +1140,55 @@ class _FrostedInputBar extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// A decoration that paints a gradient border.
+class GradientBoxBorder extends BoxBorder {
+  final Gradient gradient;
+  final double borderWidth;
+
+  const GradientBoxBorder({required this.gradient, this.borderWidth = 1.0});
+
+  @override
+  BorderSide get top => BorderSide.none;
+
+  @override
+  BorderSide get bottom => BorderSide.none;
+
+  @override
+  EdgeInsetsGeometry get dimensions => EdgeInsets.all(borderWidth);
+
+  @override
+  bool get isUniform => true;
+
+  @override
+  ShapeBorder scale(double t) =>
+      GradientBoxBorder(gradient: gradient, borderWidth: borderWidth * t);
+
+  @override
+  void paint(Canvas canvas, Rect rect,
+      {ui.TextDirection? textDirection,
+      BoxShape shape = BoxShape.rectangle,
+      BorderRadius? borderRadius}) {
+    final paint = Paint()
+      ..shader = gradient.createShader(rect)
+      ..strokeWidth = borderWidth
+      ..style = PaintingStyle.stroke;
+
+    if (shape == BoxShape.circle) {
+      canvas.drawCircle(rect.center, (rect.shortestSide - borderWidth) / 2, paint);
+    } else if (borderRadius != null) {
+      canvas.drawRRect(
+        borderRadius
+            .resolve(textDirection)
+            .toRRect(rect)
+            .deflate(borderWidth / 2),
+        paint,
+      );
+    } else {
+      canvas.drawRect(rect.deflate(borderWidth / 2), paint);
+    }
   }
 }
 
@@ -1107,10 +1282,17 @@ class _ChatHistoryDrawer extends ConsumerWidget {
                       ),
                       const SizedBox(width: AppSpacing.sm),
                       Expanded(
-                        child: Text(
-                          'Chat History',
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
+                        child: ShaderMask(
+                          shaderCallback: (bounds) =>
+                              AppColors.primaryGradient.createShader(
+                            Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                          ),
+                          child: Text(
+                            'Chat History',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -1359,17 +1541,40 @@ class _EmptySessionsState extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 56,
-              height: 56,
+              width: 60,
+              height: 60,
               decoration: BoxDecoration(
-                color: AppColors.primaryBlue
-                    .withValues(alpha: isDark ? 0.15 : 0.1),
                 shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppColors.primaryBlue.withValues(alpha: isDark ? 0.25 : 0.15),
+                    AppColors.primaryBlue.withValues(alpha: isDark ? 0.1 : 0.05),
+                  ],
+                ),
+                border: Border.all(
+                  color: AppColors.primaryBlue.withValues(alpha: isDark ? 0.2 : 0.12),
+                  width: 1,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primaryBlue.withValues(alpha: 0.1),
+                    blurRadius: 16,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
-              child: const Icon(
-                Icons.chat_bubble_outline_rounded,
-                size: 28,
-                color: AppColors.primaryBlueLight,
+              child: ShaderMask(
+                shaderCallback: (bounds) =>
+                    AppColors.primaryGradient.createShader(
+                  Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                ),
+                child: const Icon(
+                  Icons.chat_bubble_outline_rounded,
+                  size: 28,
+                  color: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
@@ -1505,6 +1710,14 @@ class _SessionTile extends StatelessWidget {
                   : AppColors.primaryBlue.withValues(alpha: 0.08))
               : Colors.transparent,
           borderRadius: AppSpacing.borderRadiusSm,
+          border: isActive
+              ? Border(
+                  left: BorderSide(
+                    color: AppColors.primaryBlue,
+                    width: 2.5,
+                  ),
+                )
+              : null,
         ),
         child: Material(
           color: Colors.transparent,

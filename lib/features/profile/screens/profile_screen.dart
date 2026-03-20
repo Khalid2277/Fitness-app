@@ -94,28 +94,58 @@ class ProfileScreen extends ConsumerWidget {
                       isDark,
                       child: Column(
                         children: [
-                          // Gradient avatar
+                          // Gradient avatar with outer ring
                           Container(
-                            width: 64,
-                            height: 64,
+                            width: 76,
+                            height: 76,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: AppColors.primaryGradient,
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFF6366F1),
+                                  Color(0xFF818CF8),
+                                  Color(0xFF00BFA6),
+                                ],
+                              ),
                               boxShadow: [
                                 BoxShadow(
                                   color: AppColors.primaryBlue
-                                      .withValues(alpha: 0.3),
-                                  blurRadius: 16,
+                                      .withValues(alpha: 0.35),
+                                  blurRadius: 20,
+                                  spreadRadius: 2,
                                   offset: const Offset(0, 4),
                                 ),
                               ],
                             ),
                             child: Center(
-                              child: Text(
-                                initials,
-                                style: theme.textTheme.headlineSmall?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
+                              child: Container(
+                                width: 68,
+                                height: 68,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: theme.colorScheme.surface,
+                                ),
+                                child: Center(
+                                  child: Container(
+                                    width: 62,
+                                    height: 62,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: AppColors.primaryGradient,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        initials,
+                                        style: theme.textTheme.headlineSmall
+                                            ?.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -123,11 +153,23 @@ class ProfileScreen extends ConsumerWidget {
 
                           const SizedBox(height: AppSpacing.lg),
 
-                          // User name
-                          Text(
-                            name,
-                            style: theme.textTheme.headlineMedium?.copyWith(
-                              fontWeight: FontWeight.w700,
+                          // User name with gradient
+                          ShaderMask(
+                            shaderCallback: (bounds) =>
+                                const LinearGradient(
+                              colors: [
+                                Color(0xFF6366F1),
+                                Color(0xFF818CF8),
+                                Color(0xFF00BFA6),
+                              ],
+                            ).createShader(bounds),
+                            child: Text(
+                              name,
+                              style:
+                                  theme.textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
 
@@ -167,14 +209,47 @@ class ProfileScreen extends ConsumerWidget {
 
                           const SizedBox(height: AppSpacing.md),
 
-                          // Edit Profile button
+                          // Edit Profile button with gradient accent
                           GestureDetector(
                             onTap: () => context.push('/edit-profile'),
-                            child: Text(
-                              'Edit Profile',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: AppColors.primaryBlue,
-                                fontWeight: FontWeight.w600,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.xl,
+                                vertical: AppSpacing.sm,
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppColors.primaryBlue
+                                        .withValues(alpha: 0.12),
+                                    AppColors.accent
+                                        .withValues(alpha: 0.08),
+                                  ],
+                                ),
+                                borderRadius: AppSpacing.borderRadiusPill,
+                                border: Border.all(
+                                  color: AppColors.primaryBlue
+                                      .withValues(alpha: 0.25),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.edit_rounded,
+                                    size: 14,
+                                    color: AppColors.primaryBlue,
+                                  ),
+                                  const SizedBox(width: AppSpacing.xs),
+                                  Text(
+                                    'Edit Profile',
+                                    style:
+                                        theme.textTheme.bodyMedium?.copyWith(
+                                      color: AppColors.primaryBlue,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -294,11 +369,23 @@ class ProfileScreen extends ConsumerWidget {
                           isDark: isDark,
                         ),
                         const SizedBox(height: AppSpacing.md),
-                        Divider(
+                        Container(
                           height: 1,
-                          color: isDark
-                              ? Colors.white.withValues(alpha: 0.06)
-                              : AppColors.dividerLight,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.transparent,
+                                isDark
+                                    ? Colors.white.withValues(alpha: 0.08)
+                                    : AppColors.dividerLight,
+                                isDark
+                                    ? Colors.white.withValues(alpha: 0.08)
+                                    : AppColors.dividerLight,
+                                Colors.transparent,
+                              ],
+                              stops: const [0.0, 0.2, 0.8, 1.0],
+                            ),
+                          ),
                         ),
                         const SizedBox(height: AppSpacing.md),
                         Row(
@@ -310,10 +397,38 @@ class ProfileScreen extends ConsumerWidget {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            Text(
-                              '${calorieTarget}kcal',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.sm,
+                                vertical: AppSpacing.xs,
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppColors.primaryBlue
+                                        .withValues(alpha: 0.1),
+                                    AppColors.accent
+                                        .withValues(alpha: 0.06),
+                                  ],
+                                ),
+                                borderRadius: AppSpacing.borderRadiusSm,
+                              ),
+                              child: ShaderMask(
+                                shaderCallback: (bounds) =>
+                                    const LinearGradient(
+                                  colors: [
+                                    AppColors.primaryBlue,
+                                    AppColors.accent,
+                                  ],
+                                ).createShader(bounds),
+                                child: Text(
+                                  '$calorieTarget kcal',
+                                  style: theme.textTheme.bodyMedium
+                                      ?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -510,10 +625,20 @@ class ProfileScreen extends ConsumerWidget {
             color: theme.colorScheme.surface,
             borderRadius: AppSpacing.borderRadiusLg,
             border: Border.all(
-              color: Colors.white.withValues(alpha: isDark ? 0.07 : 0.0),
+              color: isDark
+                  ? AppColors.primaryBlue.withValues(alpha: 0.08)
+                  : AppColors.dividerLight,
             ),
-            boxShadow:
-                isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
+            boxShadow: [
+              ...(isDark
+                  ? AppColors.cardShadowDark
+                  : AppColors.cardShadowLight),
+              BoxShadow(
+                color: AppColors.primaryBlue.withValues(alpha: 0.03),
+                blurRadius: 20,
+                spreadRadius: 1,
+              ),
+            ],
           ),
           clipBehavior: Clip.antiAlias,
           child: Column(
@@ -521,12 +646,21 @@ class ProfileScreen extends ConsumerWidget {
               for (int i = 0; i < items.length; i++) ...[
                 _buildSettingTile(theme, isDark, items[i]),
                 if (i < items.length - 1)
-                  Divider(
-                    height: 1,
-                    indent: 56,
-                    color: isDark
-                        ? Colors.white.withValues(alpha: 0.06)
-                        : AppColors.dividerLight,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 56),
+                    child: Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            isDark
+                                ? Colors.white.withValues(alpha: 0.06)
+                                : AppColors.dividerLight,
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
               ],
             ],
@@ -553,8 +687,18 @@ class ProfileScreen extends ConsumerWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: item.iconColor.withValues(alpha: 0.1),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    item.iconColor.withValues(alpha: 0.15),
+                    item.iconColor.withValues(alpha: 0.05),
+                  ],
+                ),
                 borderRadius: AppSpacing.borderRadiusSm,
+                border: Border.all(
+                  color: item.iconColor.withValues(alpha: 0.1),
+                ),
               ),
               child: Icon(item.icon, color: item.iconColor, size: 20),
             ),
@@ -590,9 +734,18 @@ class ProfileScreen extends ConsumerWidget {
       width: 1,
       height: AppSpacing.xxxl,
       decoration: BoxDecoration(
-        color: isDark
-            ? Colors.white.withValues(alpha: 0.08)
-            : AppColors.dividerLight,
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.transparent,
+            isDark
+                ? Colors.white.withValues(alpha: 0.1)
+                : AppColors.dividerLight,
+            Colors.transparent,
+          ],
+          stops: const [0.0, 0.5, 1.0],
+        ),
         borderRadius: BorderRadius.circular(1),
       ),
     );
@@ -667,6 +820,13 @@ class _MacroRow extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: color.withValues(alpha: 0.4),
+                blurRadius: 6,
+                spreadRadius: 1,
+              ),
+            ],
           ),
         ),
         const SizedBox(width: AppSpacing.md),
@@ -684,6 +844,7 @@ class _MacroRow extends StatelessWidget {
           value,
           style: theme.textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w700,
+            color: color,
           ),
         ),
       ],
@@ -706,10 +867,19 @@ class _StatColumn extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            value,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w700,
+          ShaderMask(
+            shaderCallback: (bounds) => LinearGradient(
+              colors: [
+                theme.colorScheme.onSurface,
+                theme.colorScheme.onSurface.withValues(alpha: 0.85),
+              ],
+            ).createShader(bounds),
+            child: Text(
+              value,
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
             ),
           ),
           const SizedBox(height: AppSpacing.xs),
@@ -719,7 +889,8 @@ class _StatColumn extends StatelessWidget {
               color: isDark
                   ? AppColors.textTertiaryDark
                   : AppColors.textTertiaryLight,
-              letterSpacing: 1.0,
+              letterSpacing: 1.2,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],

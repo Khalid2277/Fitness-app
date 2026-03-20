@@ -41,17 +41,40 @@ class NutritionScreen extends ConsumerWidget {
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                 child: Row(
                   children: [
+                    // Premium avatar with ring accent
                     Container(
-                      width: 42,
-                      height: 42,
+                      width: 48,
+                      height: 48,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         gradient: AppColors.primaryGradient,
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                AppColors.primaryBlue.withValues(alpha: 0.35),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
-                      child: const Icon(
-                        Icons.person_rounded,
-                        color: Colors.white,
-                        size: 20,
+                      child: Container(
+                        margin: const EdgeInsets.all(2.5),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: theme.colorScheme.surface,
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.all(2),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: AppColors.primaryGradient,
+                          ),
+                          child: const Icon(
+                            Icons.person_rounded,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(width: AppSpacing.md),
@@ -59,15 +82,24 @@ class NutritionScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Nutrition',
-                            style: theme.textTheme.headlineSmall?.copyWith(
-                              fontWeight: FontWeight.w800,
+                          // Gradient-tinted title for premium feel
+                          ShaderMask(
+                            shaderCallback: (bounds) =>
+                                AppColors.primaryGradient
+                                    .createShader(bounds),
+                            blendMode: BlendMode.srcIn,
+                            child: Text(
+                              'Nutrition',
+                              style:
+                                  theme.textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.w800,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            DateFormat('EEEE, MMMM d').format(selectedDate),
+                            DateFormat('EEEE, MMMM d')
+                                .format(selectedDate),
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: isDark
                                   ? AppColors.textSecondaryDark
@@ -111,22 +143,34 @@ class NutritionScreen extends ConsumerWidget {
               error: (error, _) => SliverToBoxAdapter(
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(40),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.xl,
+                      vertical: AppSpacing.xxxxl,
+                    ),
                     child: Column(
                       children: [
-                        Icon(
-                          Icons.error_outline_rounded,
-                          size: 48,
-                          color: AppColors.error.withValues(alpha: 0.6),
+                        // Larger error icon with tinted background
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.error.withValues(alpha: 0.08),
+                          ),
+                          child: Icon(
+                            Icons.error_outline_rounded,
+                            size: 40,
+                            color: AppColors.error.withValues(alpha: 0.7),
+                          ),
                         ),
-                        const SizedBox(height: AppSpacing.md),
+                        const SizedBox(height: AppSpacing.xl),
                         Text(
                           'Could not load nutrition data',
                           style: theme.textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                        const SizedBox(height: AppSpacing.xs),
+                        const SizedBox(height: AppSpacing.sm),
                         Text(
                           '$error',
                           style: theme.textTheme.bodySmall?.copyWith(
@@ -135,6 +179,35 @@ class NutritionScreen extends ConsumerWidget {
                                 : AppColors.textTertiaryLight,
                           ),
                           textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: AppSpacing.xxl),
+                        // Retry button
+                        SizedBox(
+                          width: 160,
+                          height: 44,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: AppColors.primaryGradient,
+                              borderRadius: AppSpacing.borderRadiusPill,
+                            ),
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                ref.invalidate(dailyNutritionProvider);
+                              },
+                              icon: const Icon(Icons.refresh_rounded,
+                                  size: 18),
+                              label: const Text('Retry'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                foregroundColor: Colors.white,
+                                shadowColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      AppSpacing.borderRadiusPill,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -158,16 +231,35 @@ class NutritionScreen extends ConsumerWidget {
                           vertical: AppSpacing.xxl,
                         ),
                         decoration: BoxDecoration(
-                          color: theme.colorScheme.surface,
-                          borderRadius: AppSpacing.borderRadiusLg,
+                          // Subtle gradient overlay on card background
+                          gradient: isDark
+                              ? LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    AppColors.surfaceDark1,
+                                    AppColors.surfaceDark2
+                                        .withValues(alpha: 0.8),
+                                  ],
+                                )
+                              : LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    AppColors.surfaceLight,
+                                    AppColors.surfaceLight1,
+                                  ],
+                                ),
+                          borderRadius: AppSpacing.borderRadiusXl,
                           border: Border.all(
                             color: isDark
-                                ? Colors.white.withValues(alpha: 0.06)
+                                ? AppColors.primaryBlue
+                                    .withValues(alpha: 0.08)
                                 : AppColors.dividerLight,
                           ),
                           boxShadow: isDark
                               ? AppColors.cardShadowDark
-                              : AppColors.cardShadowLight,
+                              : AppColors.elevatedShadowLight,
                         ),
                         child: Column(
                           children: [
@@ -193,12 +285,30 @@ class NutritionScreen extends ConsumerWidget {
                                   isDark: isDark,
                                   theme: theme,
                                 ),
+                                // Premium divider with gradient fade
                                 Container(
                                   width: 1,
-                                  height: 36,
-                                  color: isDark
-                                      ? Colors.white.withValues(alpha: 0.08)
-                                      : AppColors.dividerLight,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        (isDark
+                                                ? Colors.white
+                                                : AppColors.dividerLight)
+                                            .withValues(alpha: 0.0),
+                                        (isDark
+                                                ? Colors.white
+                                                : AppColors.dividerLight)
+                                            .withValues(alpha: isDark ? 0.12 : 0.8),
+                                        (isDark
+                                                ? Colors.white
+                                                : AppColors.dividerLight)
+                                            .withValues(alpha: 0.0),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                                 _CalorieStatColumn(
                                   label: 'Burned',
@@ -210,10 +320,27 @@ class NutritionScreen extends ConsumerWidget {
                                 ),
                                 Container(
                                   width: 1,
-                                  height: 36,
-                                  color: isDark
-                                      ? Colors.white.withValues(alpha: 0.08)
-                                      : AppColors.dividerLight,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        (isDark
+                                                ? Colors.white
+                                                : AppColors.dividerLight)
+                                            .withValues(alpha: 0.0),
+                                        (isDark
+                                                ? Colors.white
+                                                : AppColors.dividerLight)
+                                            .withValues(alpha: isDark ? 0.12 : 0.8),
+                                        (isDark
+                                                ? Colors.white
+                                                : AppColors.dividerLight)
+                                            .withValues(alpha: 0.0),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                                 _CalorieStatColumn(
                                   label: 'Remaining',
@@ -252,13 +379,29 @@ class NutritionScreen extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Macronutrients',
-                              style: theme.textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
+                            // Premium section title with accent line
+                            Row(
+                              children: [
+                                Container(
+                                  width: 3,
+                                  height: 18,
+                                  decoration: BoxDecoration(
+                                    gradient: AppColors.primaryGradient,
+                                    borderRadius:
+                                        AppSpacing.borderRadiusPill,
+                                  ),
+                                ),
+                                const SizedBox(width: AppSpacing.sm),
+                                Text(
+                                  'Macronutrients',
+                                  style:
+                                      theme.textTheme.titleSmall?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: AppSpacing.lg),
+                            const SizedBox(height: AppSpacing.xl),
 
                             // Protein
                             _MacroRow(
@@ -312,27 +455,61 @@ class NutritionScreen extends ConsumerWidget {
 
                     const SizedBox(height: AppSpacing.xxl),
 
-                    // ── 5. Meal Sections ──
+                    // ── 5. Food Diary Section Header ──
                     Padding(
                       padding: AppSpacing.screenPadding,
-                      child: Text(
-                        'FOOD DIARY',
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          letterSpacing: 1.2,
-                          fontWeight: FontWeight.w600,
-                          color: isDark
-                              ? AppColors.textTertiaryDark
-                              : AppColors.textTertiaryLight,
-                        ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 3,
+                            height: 14,
+                            decoration: BoxDecoration(
+                              gradient: AppColors.accentGradient,
+                              borderRadius: AppSpacing.borderRadiusPill,
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.sm),
+                          Text(
+                            'FOOD DIARY',
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              letterSpacing: 1.2,
+                              fontWeight: FontWeight.w700,
+                              color: isDark
+                                  ? AppColors.textTertiaryDark
+                                  : AppColors.textTertiaryLight,
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.md),
+                          Expanded(
+                            child: Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    (isDark
+                                            ? AppColors.textTertiaryDark
+                                            : AppColors.dividerLight)
+                                        .withValues(alpha: 0.5),
+                                    (isDark
+                                            ? AppColors.textTertiaryDark
+                                            : AppColors.dividerLight)
+                                        .withValues(alpha: 0.0),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
 
-                    const SizedBox(height: AppSpacing.md),
+                    const SizedBox(height: AppSpacing.lg),
 
+                    // Meal sections
                     ...MealType.values.map((type) {
                       final meals = nutrition.mealsForType(type);
                       return Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
                         child: MealSection(
                           mealType: type,
                           meals: meals,
@@ -407,7 +584,8 @@ class NutritionScreen extends ConsumerWidget {
             duration: 400.ms,
             delay: 300.ms,
             curve: Curves.easeOutBack,
-          ),
+          )
+          .fadeIn(duration: 300.ms, delay: 300.ms),
     );
   }
 }
@@ -464,23 +642,34 @@ class _CalorieStatColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Larger icon container with subtle outer glow
         Container(
-          width: 32,
-          height: 32,
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.1),
+            color: color.withValues(alpha: 0.12),
             shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: color.withValues(alpha: 0.15),
+                blurRadius: 8,
+                spreadRadius: 0,
+              ),
+            ],
           ),
-          child: Icon(icon, size: 16, color: color),
+          child: Icon(icon, size: 18, color: color),
         ),
         const SizedBox(height: AppSpacing.sm),
+        // Larger value for visual hierarchy
         Text(
           '$value',
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w700,
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+            fontSize: 20,
           ),
         ),
         const SizedBox(height: 2),
+        // Smaller label
         Text(
           label,
           style: theme.textTheme.labelSmall?.copyWith(
@@ -488,6 +677,7 @@ class _CalorieStatColumn extends StatelessWidget {
                 ? AppColors.textTertiaryDark
                 : AppColors.textTertiaryLight,
             fontWeight: FontWeight.w500,
+            fontSize: 11,
           ),
         ),
       ],
@@ -522,12 +712,20 @@ class _MacroRow extends StatelessWidget {
       children: [
         Row(
           children: [
+            // Larger accent dot with subtle glow
             Container(
-              width: 8,
-              height: 8,
+              width: 10,
+              height: 10,
               decoration: BoxDecoration(
                 color: color,
                 shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: color.withValues(alpha: 0.3),
+                    blurRadius: 6,
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
@@ -562,7 +760,7 @@ class _MacroRow extends StatelessWidget {
           target: target,
           color: color,
           showLabel: false,
-          barHeight: 6,
+          barHeight: 7,
         ),
       ],
     );

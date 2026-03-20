@@ -97,7 +97,16 @@ class HomeScreen extends ConsumerWidget {
             ),
 
             SliverToBoxAdapter(
-              child: SizedBox(height: AppSpacing.xxl),
+              child: SizedBox(height: AppSpacing.lg),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: AppSpacing.screenPadding,
+                child: _GradientDivider(),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(height: AppSpacing.lg),
             ),
 
             // 4. Weekly Streak
@@ -109,7 +118,16 @@ class HomeScreen extends ConsumerWidget {
             ),
 
             SliverToBoxAdapter(
-              child: SizedBox(height: AppSpacing.xxl),
+              child: SizedBox(height: AppSpacing.lg),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: AppSpacing.screenPadding,
+                child: _GradientDivider(),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(height: AppSpacing.lg),
             ),
 
             // 5. Quick Actions (2x2)
@@ -172,32 +190,44 @@ class _GreetingHeader extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Profile Avatar
+        // Profile Avatar with gradient ring
         GestureDetector(
           onTap: () {
             HapticFeedback.lightImpact();
             context.push('/profile');
           },
           child: Container(
-            width: 50,
-            height: 50,
+            width: 52,
+            height: 52,
             decoration: BoxDecoration(
               gradient: AppColors.primaryGradient,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primaryBlue.withValues(alpha: 0.3),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+                  color: AppColors.primaryBlue.withValues(alpha: 0.35),
+                  blurRadius: 16,
+                  offset: const Offset(0, 6),
                 ),
               ],
             ),
-            child: Center(
-              child: Text(
-                userName.isNotEmpty ? userName[0].toUpperCase() : '?',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
+            padding: const EdgeInsets.all(2.5),
+            child: Container(
+              decoration: BoxDecoration(
+                color: isDark ? AppColors.surfaceDark1 : AppColors.surfaceLight1,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: ShaderMask(
+                  shaderCallback: (bounds) =>
+                      AppColors.primaryGradient.createShader(bounds),
+                  blendMode: BlendMode.srcIn,
+                  child: Text(
+                    userName.isNotEmpty ? userName[0].toUpperCase() : '?',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -220,11 +250,16 @@ class _GreetingHeader extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppSpacing.xs),
-              Text(
-                displayName,
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.3,
+              ShaderMask(
+                shaderCallback: (bounds) =>
+                    AppColors.primaryGradient.createShader(bounds),
+                blendMode: BlendMode.srcIn,
+                child: Text(
+                  displayName,
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.3,
+                  ),
                 ),
               ),
               SizedBox(height: AppSpacing.xs),
@@ -304,12 +339,12 @@ class _HeroNutritionCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           borderRadius: AppSpacing.borderRadiusXl,
-          border: isDark
-              ? Border.all(
-                  color: Colors.white.withValues(alpha: 0.07),
-                  width: 1,
-                )
-              : null,
+          border: Border.all(
+            color: isDark
+                ? Colors.white.withValues(alpha: 0.06)
+                : AppColors.dividerLight,
+            width: 1,
+          ),
           boxShadow: isDark ? AppColors.cardShadowDark : AppColors.elevatedShadowLight,
         ),
         child: Column(
@@ -321,15 +356,18 @@ class _HeroNutritionCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'TODAY\'S NUTRITION',
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: isDark
-                            ? AppColors.textTertiaryDark
-                            : AppColors.textTertiaryLight,
-                        letterSpacing: 1.2,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 11,
+                    ShaderMask(
+                      shaderCallback: (bounds) =>
+                          AppColors.primaryGradient.createShader(bounds),
+                      blendMode: BlendMode.srcIn,
+                      child: Text(
+                        'TODAY\'S NUTRITION',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: Colors.white,
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 11,
+                        ),
                       ),
                     ),
                     SizedBox(height: AppSpacing.xs),
@@ -344,18 +382,42 @@ class _HeroNutritionCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Icon(
-                  Icons.chevron_right_rounded,
-                  size: 20,
-                  color: isDark
-                      ? AppColors.textTertiaryDark
-                      : AppColors.textTertiaryLight,
+                Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.05)
+                        : AppColors.surfaceLight2,
+                    borderRadius: AppSpacing.borderRadiusSm,
+                  ),
+                  child: Icon(
+                    Icons.chevron_right_rounded,
+                    size: 18,
+                    color: isDark
+                        ? AppColors.textTertiaryDark
+                        : AppColors.textTertiaryLight,
+                  ),
                 ),
               ],
             ),
 
             SizedBox(height: AppSpacing.xxl),
 
+            // Subtle gradient glow behind calorie ring
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    AppColors.primaryBlue.withValues(alpha: isDark ? 0.08 : 0.05),
+                    Colors.transparent,
+                  ],
+                  radius: 0.85,
+                ),
+              ),
+              padding: EdgeInsets.all(AppSpacing.md),
+              child:
             // Large Calorie Ring
             CircularPercentIndicator(
               radius: 85,
@@ -392,6 +454,24 @@ class _HeroNutritionCard extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+            ), // Close gradient glow Container
+
+            SizedBox(height: AppSpacing.xxl),
+
+            // Gradient-faded divider
+            Container(
+              height: 1,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.transparent,
+                    (isDark ? AppColors.dividerDark : AppColors.dividerLight)
+                        .withValues(alpha: 0.5),
+                    Colors.transparent,
+                  ],
+                ),
               ),
             ),
 
@@ -471,6 +551,10 @@ class _MacroPill extends StatelessWidget {
             ? color.withValues(alpha: 0.08)
             : color.withValues(alpha: 0.06),
         borderRadius: AppSpacing.borderRadiusMd,
+        border: Border.all(
+          color: color.withValues(alpha: isDark ? 0.12 : 0.08),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -563,13 +647,13 @@ class _TodaysWorkoutCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: AppSpacing.borderRadiusLg,
-        border: isDark
-            ? Border.all(
-                color: Colors.white.withValues(alpha: 0.07),
-                width: 1,
-              )
-            : null,
-        boxShadow: isDark ? null : AppColors.cardShadowLight,
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.06)
+              : AppColors.dividerLight,
+          width: 1,
+        ),
+        boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
       ),
       child: workout != null
           ? _buildWorkoutContent(context, theme, isDark)
@@ -597,13 +681,21 @@ class _TodaysWorkoutCard extends StatelessWidget {
         Row(
           children: [
             Container(
-              width: 28,
-              height: 28,
+              width: 30,
+              height: 30,
               decoration: BoxDecoration(
                 color: w.isCompleted
                     ? AppColors.success.withValues(alpha: 0.15)
                     : AppColors.primaryBlue.withValues(alpha: 0.15),
                 borderRadius: AppSpacing.borderRadiusSm,
+                boxShadow: [
+                  BoxShadow(
+                    color: (w.isCompleted ? AppColors.success : AppColors.primaryBlue)
+                        .withValues(alpha: 0.2),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: Icon(
                 w.isCompleted
@@ -907,13 +999,13 @@ class _WeeklyStreakCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: AppSpacing.borderRadiusLg,
-        border: isDark
-            ? Border.all(
-                color: Colors.white.withValues(alpha: 0.07),
-                width: 1,
-              )
-            : null,
-        boxShadow: isDark ? null : AppColors.cardShadowLight,
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.06)
+              : AppColors.dividerLight,
+          width: 1,
+        ),
+        boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1289,24 +1381,31 @@ class _QuickActionTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
             borderRadius: AppSpacing.borderRadiusLg,
-            border: isDark
-                ? Border.all(
-                    color: Colors.white.withValues(alpha: 0.07),
-                    width: 1,
-                  )
-                : null,
-            boxShadow: isDark ? null : AppColors.cardShadowLight,
+            border: Border.all(
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.06)
+                  : AppColors.dividerLight,
+              width: 1,
+            ),
+            boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Colored icon container (40x40)
+              // Colored icon container with glow
               Container(
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: isDark ? 0.15 : 0.1),
                   borderRadius: AppSpacing.borderRadiusMd,
+                  boxShadow: [
+                    BoxShadow(
+                      color: color.withValues(alpha: 0.15),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
                 child: Icon(
                   icon,
@@ -1439,13 +1538,13 @@ class _RecentWorkoutCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           borderRadius: AppSpacing.borderRadiusMd,
-          border: isDark
-              ? Border.all(
-                  color: Colors.white.withValues(alpha: 0.07),
-                  width: 1,
-                )
-              : null,
-          boxShadow: isDark ? null : AppColors.cardShadowLight,
+          border: Border.all(
+            color: isDark
+                ? Colors.white.withValues(alpha: 0.06)
+                : AppColors.dividerLight,
+            width: 1,
+          ),
+          boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
         ),
         child: IntrinsicHeight(
           child: Row(
@@ -1580,6 +1679,32 @@ class _RecentWorkoutCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+// =============================================================================
+// Gradient Divider
+// =============================================================================
+
+class _GradientDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Container(
+      height: 1,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.transparent,
+            (isDark ? AppColors.dividerDark : AppColors.dividerLight)
+                .withValues(alpha: 0.6),
+            Colors.transparent,
+          ],
         ),
       ),
     );

@@ -42,10 +42,15 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Progress',
-                            style: theme.textTheme.headlineMedium?.copyWith(
-                              fontWeight: FontWeight.w700,
+                          ShaderMask(
+                            shaderCallback: (bounds) =>
+                                AppColors.primaryGradient.createShader(bounds),
+                            child: Text(
+                              'Progress',
+                              style: theme.textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 2),
@@ -156,7 +161,9 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
             ),
             error: (e, st) => const SizedBox.shrink(),
           ),
-          const SizedBox(height: AppSpacing.xxl),
+          const SizedBox(height: AppSpacing.xl),
+          _buildGradientDivider(isDark),
+          const SizedBox(height: AppSpacing.xl),
 
           // ── Body Metrics Grid ──
           _buildBodyMetricsSection(theme, isDark, latestAsync, metricsAsync),
@@ -164,7 +171,9 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
 
           // ── Log Measurement CTA ──
           _buildLogMeasurementCta(theme, isDark),
-          const SizedBox(height: AppSpacing.lg),
+          const SizedBox(height: AppSpacing.md),
+          _buildGradientDivider(isDark),
+          const SizedBox(height: AppSpacing.md),
 
           // ── Progress Photos CTA ──
           _buildProgressPhotosCta(theme, isDark),
@@ -255,6 +264,15 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                           style: theme.textTheme.displayMedium?.copyWith(
                             fontWeight: FontWeight.w700,
                             letterSpacing: -1,
+                            shadows: weight != null
+                                ? [
+                                    Shadow(
+                                      color: AppColors.primaryBlue
+                                          .withValues(alpha: 0.3),
+                                      blurRadius: 12,
+                                    ),
+                                  ]
+                                : null,
                           ),
                         ),
                         const SizedBox(width: 6),
@@ -552,11 +570,28 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
         child: Column(
           children: [
             Container(
-              width: 56,
-              height: 56,
+              width: 64,
+              height: 64,
               decoration: BoxDecoration(
-                color: AppColors.primaryBlue.withValues(alpha: 0.1),
-                borderRadius: AppSpacing.borderRadiusLg,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppColors.primaryBlue.withValues(alpha: 0.18),
+                    AppColors.primaryBlueLight.withValues(alpha: 0.06),
+                  ],
+                ),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.primaryBlue.withValues(alpha: 0.15),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primaryBlue.withValues(alpha: 0.12),
+                    blurRadius: 16,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
               child: const Icon(
                 Icons.straighten_rounded,
@@ -675,8 +710,18 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: AppColors.accent.withValues(alpha: 0.15),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppColors.accent.withValues(alpha: 0.22),
+                    AppColors.accent.withValues(alpha: 0.06),
+                  ],
+                ),
                 borderRadius: AppSpacing.borderRadiusMd,
+                border: Border.all(
+                  color: AppColors.accent.withValues(alpha: 0.15),
+                ),
               ),
               child: const Icon(
                 Icons.camera_alt_rounded,
@@ -740,12 +785,28 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                     child: Column(
                       children: [
                         Container(
-                          width: 64,
-                          height: 64,
+                          width: 72,
+                          height: 72,
                           decoration: BoxDecoration(
-                            color:
-                                AppColors.warning.withValues(alpha: 0.1),
-                            borderRadius: AppSpacing.borderRadiusXl,
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                AppColors.warning.withValues(alpha: 0.2),
+                                AppColors.warning.withValues(alpha: 0.05),
+                              ],
+                            ),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: AppColors.warning.withValues(alpha: 0.15),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.warning.withValues(alpha: 0.12),
+                                blurRadius: 16,
+                                spreadRadius: 2,
+                              ),
+                            ],
                           ),
                           child: const Icon(
                             Icons.emoji_events_rounded,
@@ -802,9 +863,18 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                           width: 48,
                           height: 48,
                           decoration: BoxDecoration(
-                            color: AppColors.warning
-                                .withValues(alpha: 0.15),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                AppColors.warning.withValues(alpha: 0.22),
+                                AppColors.warning.withValues(alpha: 0.06),
+                              ],
+                            ),
                             borderRadius: AppSpacing.borderRadiusMd,
+                            border: Border.all(
+                              color: AppColors.warning.withValues(alpha: 0.15),
+                            ),
                           ),
                           child: const Icon(
                             Icons.emoji_events_rounded,
@@ -1009,8 +1079,18 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: AppColors.accent.withValues(alpha: 0.12),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      AppColors.accent.withValues(alpha: 0.2),
+                      AppColors.accent.withValues(alpha: 0.06),
+                    ],
+                  ),
                   borderRadius: AppSpacing.borderRadiusSm,
+                  border: Border.all(
+                    color: AppColors.accent.withValues(alpha: 0.12),
+                  ),
                 ),
                 child: const Icon(
                   Icons.bar_chart_rounded,
@@ -1040,6 +1120,12 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                 _formatVolume(stats.totalVolume),
                 style: theme.textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.w700,
+                  shadows: [
+                    Shadow(
+                      color: AppColors.accent.withValues(alpha: 0.3),
+                      blurRadius: 10,
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(width: 6),
@@ -1101,11 +1187,28 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
         child: Column(
           children: [
             Container(
-              width: 64,
-              height: 64,
+              width: 72,
+              height: 72,
               decoration: BoxDecoration(
-                color: AppColors.primaryBlue.withValues(alpha: 0.1),
-                borderRadius: AppSpacing.borderRadiusXl,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppColors.primaryBlue.withValues(alpha: 0.18),
+                    AppColors.primaryBlueLight.withValues(alpha: 0.06),
+                  ],
+                ),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.primaryBlue.withValues(alpha: 0.15),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primaryBlue.withValues(alpha: 0.12),
+                    blurRadius: 16,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
               child: const Icon(
                 Icons.insights_rounded,
@@ -1130,6 +1233,25 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGradientDivider(bool isDark) {
+    return Container(
+      height: 1,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.transparent,
+            (isDark ? Colors.white : AppColors.primaryBlue)
+                .withValues(alpha: isDark ? 0.08 : 0.12),
+            (isDark ? Colors.white : AppColors.primaryBlue)
+                .withValues(alpha: isDark ? 0.08 : 0.12),
+            Colors.transparent,
+          ],
+          stops: const [0.0, 0.3, 0.7, 1.0],
         ),
       ),
     );
@@ -1241,19 +1363,16 @@ class _SegmentedControl extends StatelessWidget {
                 curve: Curves.easeInOut,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? (isDark
-                          ? AppColors.surfaceDark3
-                          : AppColors.surfaceLight)
-                      : Colors.transparent,
+                  gradient: isSelected ? AppColors.primaryGradient : null,
+                  color: isSelected ? null : Colors.transparent,
                   borderRadius: AppSpacing.borderRadiusPill,
                   boxShadow: isSelected
                       ? [
                           BoxShadow(
-                            color: Colors.black.withValues(
-                                alpha: isDark ? 0.2 : 0.06),
-                            blurRadius: 4,
-                            offset: const Offset(0, 1),
+                            color: AppColors.primaryBlue.withValues(
+                                alpha: isDark ? 0.3 : 0.2),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
                           ),
                         ]
                       : null,
@@ -1265,7 +1384,7 @@ class _SegmentedControl extends StatelessWidget {
                     fontWeight:
                         isSelected ? FontWeight.w600 : FontWeight.w500,
                     color: isSelected
-                        ? theme.colorScheme.onSurface
+                        ? Colors.white
                         : theme.colorScheme.onSurfaceVariant,
                   ),
                 ),
@@ -1310,9 +1429,17 @@ class _MetricSummaryCard extends StatelessWidget {
         borderRadius: AppSpacing.borderRadiusLg,
         border: Border.all(
           color: isDark
-              ? Colors.white.withValues(alpha: 0.06)
-              : AppColors.dividerLight,
+              ? iconColor.withValues(alpha: 0.1)
+              : iconColor.withValues(alpha: 0.08),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: iconColor.withValues(alpha: isDark ? 0.06 : 0.04),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+          ...(isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1323,8 +1450,18 @@ class _MetricSummaryCard extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: iconColor.withValues(alpha: 0.1),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      iconColor.withValues(alpha: 0.18),
+                      iconColor.withValues(alpha: 0.06),
+                    ],
+                  ),
                   borderRadius: AppSpacing.borderRadiusSm,
+                  border: Border.all(
+                    color: iconColor.withValues(alpha: 0.12),
+                  ),
                 ),
                 child: Icon(icon, color: iconColor, size: 18),
               ),
@@ -1351,6 +1488,14 @@ class _MetricSummaryCard extends StatelessWidget {
                 value,
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w700,
+                  shadows: value != '--'
+                      ? [
+                          Shadow(
+                            color: iconColor.withValues(alpha: 0.3),
+                            blurRadius: 8,
+                          ),
+                        ]
+                      : null,
                 ),
               ),
               const SizedBox(width: 4),
@@ -1399,11 +1544,20 @@ class _PRCard extends StatelessWidget {
         borderRadius: AppSpacing.borderRadiusLg,
         border: Border.all(
           color: isTop3
-              ? AppColors.warning.withValues(alpha: 0.2)
+              ? AppColors.warning.withValues(alpha: 0.25)
               : isDark
                   ? Colors.white.withValues(alpha: 0.06)
                   : AppColors.dividerLight,
         ),
+        boxShadow: [
+          if (isTop3)
+            BoxShadow(
+              color: AppColors.warning.withValues(alpha: isDark ? 0.08 : 0.06),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ...(isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight),
+        ],
       ),
       child: Row(
         children: [
@@ -1524,9 +1678,17 @@ class _HeroStatCard extends StatelessWidget {
         borderRadius: AppSpacing.borderRadiusLg,
         border: Border.all(
           color: isDark
-              ? Colors.white.withValues(alpha: 0.06)
-              : AppColors.dividerLight,
+              ? color.withValues(alpha: 0.1)
+              : color.withValues(alpha: 0.08),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: color.withValues(alpha: isDark ? 0.06 : 0.04),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+          ...(isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight),
+        ],
       ),
       child: Column(
         children: [
@@ -1534,8 +1696,18 @@ class _HeroStatCard extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.12),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  color.withValues(alpha: 0.2),
+                  color.withValues(alpha: 0.06),
+                ],
+              ),
               borderRadius: AppSpacing.borderRadiusSm,
+              border: Border.all(
+                color: color.withValues(alpha: 0.12),
+              ),
             ),
             child: Icon(icon, color: color, size: 20),
           ),
@@ -1544,6 +1716,12 @@ class _HeroStatCard extends StatelessWidget {
             value,
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w700,
+              shadows: [
+                Shadow(
+                  color: color.withValues(alpha: 0.35),
+                  blurRadius: 10,
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 4),

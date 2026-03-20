@@ -105,3 +105,28 @@
 - Profile: science-backed targets flow to all screens
 - Dates: 365-day scrollable selectors on both nutrition and workouts
 - 30 screens, 0 orphan routes, correct tab/modal navigation patterns
+
+## Phase 11 – UI/UX Premium Upgrade
+- [x] Audit visual consistency across all screens
+- [x] Upgrade Log Workout screen (newest, needs most polish)
+- [x] Upgrade Nutrition screen (meal cards, calorie hero, date strip)
+- [x] Upgrade Workouts screen (stats, diary cards, empty states)
+- [x] Upgrade Home screen (minor refinements)
+- [x] Upgrade Progress screen (metric cards, hero section)
+- [x] Upgrade AI Coach screen (chat bubbles, suggestions)
+- [x] Upgrade Profile screen (identity card, settings)
+- [x] Improve shared empty/loading/error states
+- [x] Refine date selectors (both nutrition & workouts)
+- [x] Final consistency pass and build
+
+### Phase 11 Changes
+1. **Log Workout screen**: Full premium rewrite — glassmorphism date card, gradient accent strips per muscle group, dashed border add-exercise button, inline set inputs, premium save button with loading state, empty exercises state
+2. **Nutrition screen**: ShaderMask gradient title, gradient avatar ring, elevated card shadows, gradient-faded dividers, improved error state with gradient retry button
+3. **Nutrition date selector**: Gradient selected state, month boundary labels, glow today dot, bouncing scroll physics, better typography
+4. **Workouts screen**: ShaderMask gradient title, gradient date selector items, gradient-tinted stat card icons, improved empty state with gradient circle, gradient-faded section dividers, fixed unused import/variable warnings
+5. **Home screen**: ShaderMask gradient greeting title, gradient-tinted icon containers, improved card borders with premium shadows, gradient avatar ring
+6. **Progress screen**: ShaderMask gradient title, gradient tab indicator, gradient-tinted metric icons, improved empty states with gradient circles
+7. **AI Coach screen**: ShaderMask gradient header, gradient send button, premium input field with gradient focus border, improved suggestion chips
+8. **Profile screen**: Gradient avatar ring, ShaderMask gradient name, gradient-tinted stat icons, improved section dividers
+9. **Shared widgets**: Core EmptyState, ShimmerLoading, AppCard already premium quality — no changes needed
+10. **editingWorkout parameter**: Added to LogWorkoutScreen for edit/repeat workflow from router
