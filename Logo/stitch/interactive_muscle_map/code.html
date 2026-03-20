@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#947f68",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0a0e14",
+                        "primary": "#b8c3ff",
+                        "inverse-primary": "#124af0",
+                        "on-primary-fixed-variant": "#0035be",
+                        "on-surface-variant": "#c5c6cc",
+                        "tertiary-fixed": "#f9dec3",
+                        "on-secondary-container": "#adb5c6",
+                        "tertiary": "#dbc2a9",
+                        "on-secondary-fixed": "#141c28",
+                        "on-tertiary-fixed-variant": "#554430",
+                        "error": "#ffb4ab",
+                        "surface-container": "#1c2026",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#dbc2a9",
+                        "on-secondary": "#29313e",
+                        "on-primary-fixed": "#001356",
+                        "tertiary-container": "#241707",
+                        "primary-container": "#001151",
+                        "surface-variant": "#31353c",
+                        "secondary-container": "#3f4755",
+                        "secondary": "#bfc7d7",
+                        "secondary-fixed-dim": "#bfc7d7",
+                        "on-tertiary-fixed": "#261909",
+                        "background": "#10141a",
+                        "on-tertiary": "#3d2e1c",
+                        "surface-bright": "#353940",
+                        "on-secondary-fixed-variant": "#3f4755",
+                        "outline": "#8f9096",
+                        "surface-dim": "#10141a",
+                        "outline-variant": "#45474c",
+                        "surface-tint": "#b8c3ff",
+                        "surface-container-highest": "#31353c",
+                        "on-error": "#690005",
+                        "surface-container-low": "#181c22",
+                        "on-primary": "#002388",
+                        "on-primary-container": "#5777ff",
+                        "on-surface": "#dfe2eb",
+                        "primary-fixed": "#dde1ff",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "secondary-fixed": "#dbe3f4",
+                        "surface-container-high": "#262a31",
+                        "on-background": "#dfe2eb",
+                        "surface": "#10141a",
+                        "inverse-surface": "#dfe2eb",
+                        "inverse-on-surface": "#2d3137"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased select-none">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#31353c]/70 backdrop-blur-md flex items-center justify-between px-6 h-16 bg-gradient-to-b from-[#1c2026] to-transparent">
+<div class="flex items-center gap-4">
+<button class="text-[#b8c3ff] active:scale-95 transition-transform duration-200 flex items-center justify-center p-2 hover:bg-[#45474c]/20 rounded-full">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-extrabold tracking-tighter text-[#dfe2eb] font-['Plus_Jakarta_Sans']">AlfaTechLabs Fitness</h1>
+</div>
+<div class="flex-1 flex justify-center">
+<span class="text-[#b8c3ff] font-['Plus_Jakarta_Sans'] tracking-[-0.02em] font-bold">Muscle Analysis</span>
+</div>
+<div class="flex items-center">
+<button class="text-[#b8c3ff] active:scale-95 transition-transform duration-200 flex items-center justify-center p-2 hover:bg-[#45474c]/20 rounded-full">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-28 min-h-screen px-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+<!-- Left Column: Interactive Map Canvas -->
+<section class="flex-1 flex flex-col items-center justify-center bg-surface-container-low rounded-xl p-6 relative overflow-hidden group">
+<!-- View Toggle -->
+<div class="absolute top-6 left-6 z-10 flex bg-surface-container-high p-1 rounded-lg">
+<button class="px-4 py-1.5 rounded-md text-xs font-bold tracking-wider bg-primary text-on-primary-fixed shadow-sm transition-all">FRONT</button>
+<button class="px-4 py-1.5 rounded-md text-xs font-bold tracking-wider text-on-surface-variant hover:text-on-surface transition-all">BACK</button>
+</div>
+<!-- Focus Controls -->
+<div class="absolute bottom-6 left-6 z-10 flex flex-col gap-2">
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<!-- Heatmap Legend -->
+<div class="absolute bottom-6 right-6 z-10 bg-surface-container-high/80 backdrop-blur-md p-3 rounded-xl border border-white/5">
+<p class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2">Intensity</p>
+<div class="flex items-center gap-1.5">
+<div class="w-3 h-3 rounded-full bg-primary/20"></div>
+<div class="w-3 h-3 rounded-full bg-primary/40"></div>
+<div class="w-3 h-3 rounded-full bg-primary/70"></div>
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+</div>
+</div>
+<!-- Anatomical Model Mockup -->
+<div class="relative w-full max-w-md aspect-[3/4] flex items-center justify-center">
+<!-- Placeholder for high-end SVG or 3D Render -->
+<div class="w-full h-full flex items-center justify-center">
+<img alt="Human anatomical muscle structure front view" class="h-full object-contain opacity-20 grayscale brightness-150" data-alt="Anatomical silhouette of human muscular system front" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClUGFXxzHK185XW-G0p5LJl-F8wFyozUKgy0sBepz5jgXhjV6WFRm0STjsgSIh5xQ0vpK5R3WFKJeLE99drIFcgpk1MKy_654A1VBeh0tuFmOqAUdS8vTs63ahCRog5opHxiomLDST8FKRf_DnhiAvdT80IyMWs0Q1akLI32HGM77vEBgJZ-XKrGbUmA8yzq9FlKR-Q508IOUHwF1TGSpdmM2k-hPj2npjjdlS6LVxWACWtD_ln_6zCoFPGABE5sLuCZVbQcpBW34"/>
+<!-- Interactive Hotspots (Example: Chest/Pecs) -->
+<div class="absolute top-[28%] left-[35%] w-[30%] h-[15%] cursor-pointer group/muscle">
+<div class="w-full h-full bg-primary/40 rounded-full blur-xl group-hover/muscle:bg-primary/60 transition-all"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-[10px] font-bold text-primary tracking-tighter opacity-0 group-hover/muscle:opacity-100 transition-opacity">PECTORALS</span>
+</div>
+</div>
+<!-- Example: Quads -->
+<div class="absolute top-[60%] left-[30%] w-[18%] h-[20%] cursor-pointer group/muscle">
+<div class="w-full h-full bg-primary/20 rounded-full blur-lg group-hover/muscle:bg-primary/40 transition-all"></div>
+</div>
+<div class="absolute top-[60%] right-[30%] w-[18%] h-[20%] cursor-pointer group/muscle">
+<div class="w-full h-full bg-primary/20 rounded-full blur-lg group-hover/muscle:bg-primary/40 transition-all"></div>
+</div>
+<!-- Example: Shoulders -->
+<div class="absolute top-[25%] left-[22%] w-[12%] h-[12%] cursor-pointer group/muscle">
+<div class="w-full h-full bg-primary/80 rounded-full blur-md group-hover/muscle:bg-primary transition-all"></div>
+</div>
+<div class="absolute top-[25%] right-[22%] w-[12%] h-[12%] cursor-pointer group/muscle">
+<div class="w-full h-full bg-primary/80 rounded-full blur-md group-hover/muscle:bg-primary transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Data & Insights -->
+<aside class="w-full md:w-96 flex flex-col gap-6">
+<!-- Recovery Score Section -->
+<div class="bg-surface-container rounded-xl p-6 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[10px] uppercase tracking-[0.1em] font-bold text-on-secondary-container">Recovery Status</p>
+<h2 class="text-3xl font-extrabold tracking-tight mt-1">84<span class="text-sm font-medium text-on-surface-variant ml-1">%</span></h2>
+</div>
+<div class="p-2 bg-tertiary-container rounded-lg">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-on-primary-container h-full w-[84%] rounded-full"></div>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">Systemic fatigue is low. Optimal window for hypertrophy training in <span class="text-primary font-semibold">Upper Push</span> groups.</p>
+</div>
+<!-- Targeted Muscles Bento Grid -->
+<div class="flex flex-col gap-3">
+<h3 class="text-xs font-bold uppercase tracking-[0.1em] text-on-surface-variant px-1">Targeted Muscles</h3>
+<div class="grid grid-cols-2 gap-3">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-white/5 hover:bg-surface-container transition-colors cursor-pointer">
+<p class="text-[10px] font-bold text-primary mb-1">Deltoids</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold">92</span>
+<span class="text-[10px] text-on-surface-variant uppercase">Vol</span>
+</div>
+<div class="mt-3 flex gap-1">
+<div class="flex-1 h-1 bg-primary rounded-full"></div>
+<div class="flex-1 h-1 bg-primary rounded-full"></div>
+<div class="flex-1 h-1 bg-primary rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-white/5 hover:bg-surface-container transition-colors cursor-pointer">
+<p class="text-[10px] font-bold text-primary mb-1">Pectorals</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold">78</span>
+<span class="text-[10px] text-on-surface-variant uppercase">Vol</span>
+</div>
+<div class="mt-3 flex gap-1">
+<div class="flex-1 h-1 bg-primary rounded-full"></div>
+<div class="flex-1 h-1 bg-primary rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-white/5 hover:bg-surface-container transition-colors cursor-pointer">
+<p class="text-[10px] font-bold text-on-surface-variant mb-1">Quadriceps</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold">42</span>
+<span class="text-[10px] text-on-surface-variant uppercase">Vol</span>
+</div>
+<div class="mt-3 flex gap-1">
+<div class="flex-1 h-1 bg-primary rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-white/5 hover:bg-surface-container transition-colors cursor-pointer flex flex-col justify-center items-center group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">add_circle</span>
+<p class="text-[10px] font-bold text-on-surface-variant mt-1 group-hover:text-primary uppercase tracking-tighter">Add Focus</p>
+</div>
+</div>
+</div>
+<!-- Volume History Mini Chart -->
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-white/5">
+<div class="flex justify-between items-center mb-4">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Weekly Strain</p>
+<span class="text-[10px] font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">+12% vs last week</span>
+</div>
+<div class="flex items-end justify-between h-16 gap-1 px-1">
+<div class="w-full bg-surface-container-high rounded-t-sm h-[30%]"></div>
+<div class="w-full bg-surface-container-high rounded-t-sm h-[45%]"></div>
+<div class="w-full bg-primary rounded-t-sm h-[85%]"></div>
+<div class="w-full bg-surface-container-high rounded-t-sm h-[60%]"></div>
+<div class="w-full bg-surface-container-high rounded-t-sm h-[40%]"></div>
+<div class="w-full bg-surface-container-high rounded-t-sm h-[55%]"></div>
+<div class="w-full bg-primary/50 rounded-t-sm h-[70%]"></div>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full bg-primary-fixed text-on-primary-fixed py-4 rounded-xl font-bold text-sm tracking-wide shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+                GENERATE OPTIMIZED WORKOUT
+            </button>
+</aside>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-[#1c2026]/80 backdrop-blur-lg border-t border-white/5 flex justify-around items-center h-20 px-4 pb-safe shadow-[0_-8px_32px_rgba(0,0,0,0.4)] md:hidden">
+<a class="flex flex-col items-center justify-center text-[#adb5c6] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1">grid_view</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#dde1ff] bg-[#dde1ff]/10 rounded-xl px-4 py-1 active:scale-90 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">accessibility_new</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">Muscles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1">monitoring</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">Activity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">Profile</span>
+</a>
+</nav>
+<!-- Desktop Sidebar/Nav (Hidden on Mobile) -->
+<div class="hidden md:flex fixed left-0 top-16 bottom-0 w-20 flex-col items-center py-8 gap-8 bg-surface-container-low border-r border-white/5 z-40">
+<div class="w-12 h-12 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<div class="w-12 h-12 rounded-xl flex items-center justify-center bg-primary/10 text-primary shadow-inner cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">accessibility_new</span>
+</div>
+<div class="w-12 h-12 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+<div class="mt-auto w-12 h-12 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+</div>
+</div>
+</body></html>

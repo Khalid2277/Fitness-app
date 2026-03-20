@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Body Progress | AlfaTechLabs Fitness</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary": "#bfc7d7",
+                        "outline-variant": "#45474c",
+                        "on-tertiary-container": "#947f68",
+                        "tertiary-fixed": "#f9dec3",
+                        "surface-container-highest": "#31353c",
+                        "primary-fixed": "#dde1ff",
+                        "on-error": "#690005",
+                        "surface-dim": "#10141a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1c2026",
+                        "surface": "#10141a",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#5777ff",
+                        "on-background": "#dfe2eb",
+                        "inverse-surface": "#dfe2eb",
+                        "outline": "#8f9096",
+                        "on-secondary-fixed": "#141c28",
+                        "inverse-primary": "#124af0",
+                        "on-primary-fixed-variant": "#0035be",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "on-surface": "#dfe2eb",
+                        "on-primary": "#002388",
+                        "tertiary": "#dbc2a9",
+                        "surface-container-high": "#262a31",
+                        "surface-variant": "#31353c",
+                        "error-container": "#93000a",
+                        "secondary-container": "#3f4755",
+                        "on-tertiary": "#3d2e1c",
+                        "on-secondary-container": "#adb5c6",
+                        "primary": "#b8c3ff",
+                        "on-secondary": "#29313e",
+                        "surface-container-low": "#181c22",
+                        "surface-container-lowest": "#0a0e14",
+                        "surface-bright": "#353940",
+                        "tertiary-fixed-dim": "#dbc2a9",
+                        "surface-tint": "#b8c3ff",
+                        "secondary-fixed-dim": "#bfc7d7",
+                        "inverse-on-surface": "#2d3137",
+                        "tertiary-container": "#241707",
+                        "on-secondary-fixed-variant": "#3f4755",
+                        "background": "#10141a",
+                        "primary-container": "#001151",
+                        "on-tertiary-fixed-variant": "#554430",
+                        "secondary-fixed": "#dbe3f4",
+                        "on-tertiary-fixed": "#261909",
+                        "on-primary-fixed": "#001356",
+                        "on-surface-variant": "#c5c6cc"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-low font-body text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-[#10141a]/80 backdrop-blur-md w-full px-6 py-4 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a fit athlete" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUrJMBWUPfjJVDKiv1iRIFNQWhcYxGOpUHxXZozdD2PRbU8Pw045_3lr-_lWQU0wgZ_hSKuYcuH-2BI04HeMZBB5O1jo45iDcl0084KZxb6sgxNlYuy3umgNU8KUNCjAkOxBkYx0YNIS2RnxXj8APZkSnnymQY-WmzALBaDeefRTFk8SuE2sK_D8iIPB3AF5TDDJjKQZv-jZ77TZSGE36Hbvhj77NVcrSrY2yzGFiBpgpTM2AdXPeGMWQh2fJPYLl4M87WwtZaO60"/>
+</div>
+<span class="text-lg font-bold tracking-tighter text-[#dde1ff] font-headline">AlfaTechLabs Fitness</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#adb5c6] hover:bg-[#31353c] p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 pt-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<p class="text-primary font-bold uppercase tracking-[0.05em] text-xs mb-2">Visual Assessment</p>
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface font-headline">Body Progress</h1>
+</div>
+<button class="flex items-center justify-center gap-2 bg-primary-fixed text-on-primary-fixed px-6 py-4 rounded-lg font-bold hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">photo_camera</span>
+                Capture Progress
+            </button>
+</div>
+<!-- Bento Grid: Main Comparison & Insight -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
+<!-- Comparison Slider Block -->
+<div class="lg:col-span-8 bg-surface-container rounded-3xl overflow-hidden relative group">
+<div class="absolute top-6 left-6 z-10 flex gap-2">
+<span class="bg-surface-container-lowest/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Before: Jan 12</span>
+<span class="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Current: Today</span>
+</div>
+<div class="aspect-[16/10] w-full flex relative overflow-hidden">
+<div class="w-1/2 h-full border-r border-outline-variant/20">
+<img alt="Before photo" class="w-full h-full object-cover grayscale-[0.4]" data-alt="Male athlete front view posing in gym" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFQAiJQXwqOvSMP0ZnZ0EknZo0n6LEpbcdbprRxTU9RUv9wqm4gehD3034DHndnb79Q0ltR-ciexB13LCUvfv61tyTkxqYZ1ZN76UrEYZnUwVgQ33K7Tj7LMAJLhAGZwaN4AGDzxYzKjVYdAdl80EK6sxJrsFSeXHkIcTTMvpxGDnXJPBMmW6Gl10NF_OSQX1Zmazbv4F-D70vv4Tdr8sU9OXYUg3CzOsheHSjo7Ib7KeJLutdu6Ltyz5c80Su3B3Tahe37is9sIE"/>
+</div>
+<div class="w-1/2 h-full">
+<img alt="After photo" class="w-full h-full object-cover" data-alt="Male athlete front view more defined muscle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtGl5-MihvmAI-Pu04z885E_SIzeixKg1MHGHczbDRQV5nt6bX22o6eBoRs-ThOFbiYb3SrGNlK0xQJ9kb8ongtnkk_CTO6dTkhe4QmtSA0qf_6VLImOQmjneGfJD5nhESUNN73nto4VzWeh3I0AbFbhQkE4PLQJHVTOel-5QNBSDQlpDO3cXuULT5ZLsPOlisqAwE3ze6EQBOjNxGZ1S0GFB4gXobdimT8FLHQGK-LPUnp0BYVt767EVY0CauRR-Q_ehqS6El014"/>
+</div>
+<!-- Interaction Hint -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-10 h-10 bg-on-background/10 backdrop-blur-xl rounded-full border border-on-background/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-background text-sm">unfold_more</span>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-container flex justify-between items-center">
+<div class="flex gap-4">
+<div class="text-center">
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Weight Change</p>
+<p class="text-xl font-bold text-primary">-4.2kg</p>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant/20"></div>
+<div class="text-center">
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Body Fat</p>
+<p class="text-xl font-bold text-primary">-2.1%</p>
+</div>
+</div>
+<button class="text-primary text-sm font-bold flex items-center gap-1">
+                        Full Gallery <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Smart Insight Card -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="flex-1 bg-surface-container rounded-3xl p-8 border border-outline-variant/10 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<h3 class="text-xl font-bold mb-4 leading-tight">AI Body Composition Analysis</h3>
+<p class="text-on-surface-variant leading-relaxed text-sm">
+                            Visual muscle density has increased in the <span class="text-on-surface font-semibold">upper body</span> since last month. High definition appearing in deltoids and core areas.
+                        </p>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">humerus</span>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">monitoring</span>
+</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-tertiary-container">98% Accuracy Confidence</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Section -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold font-headline">Capture Timeline</h2>
+<div class="flex bg-surface-container-high p-1 rounded-lg">
+<button class="px-4 py-1.5 rounded-md text-xs font-bold bg-surface-bright text-on-surface">ALL</button>
+<button class="px-4 py-1.5 rounded-md text-xs font-bold text-on-surface-variant hover:text-on-surface">FRONT</button>
+<button class="px-4 py-1.5 rounded-md text-xs font-bold text-on-surface-variant hover:text-on-surface">SIDE</button>
+<button class="px-4 py-1.5 rounded-md text-xs font-bold text-on-surface-variant hover:text-on-surface">BACK</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Timeline Item 1 -->
+<div class="bg-surface-container p-4 rounded-3xl group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="grid grid-cols-3 gap-2 mb-4">
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-high">
+<img alt="Front" class="w-full h-full object-cover" data-alt="Fitness front progress photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe4re1CZnRd4ZFtKbYzgC32giLvwdPJFB8hjr3lsIwhDiFktq4hcFaFdn8EwzdTVa1Q_9cbXIqNnhwMX2Z_Uy9nZX9Ga3p7v8pfTtw2WO2poqxYrq9hoq7eCm_jl1YrLSRlMXMvDPR1zB2VKhCWa0snVdrXcM3hyOjndOvr-Ltu1ylJ1Uh6TMU09M-dz-qmkiPhzKPDOEPZNwv7C1A0CvtK4eqTwcPKSe8rdt-n-zxdqyUnD5cmIIVv7uXBN7k5iAdml0n_CKkJS4"/>
+</div>
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-high">
+<img alt="Side" class="w-full h-full object-cover opacity-80" data-alt="Fitness side progress photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn8jEhOd52GAMQBRZVmMPnwNieRlXSB6BVaFfeTTG3-YFpsvmpPOuWCAHprAo3diR633x98kff6VtSkx8va8dllUZe8fuETH_ga1w-dsz7gBpXdj2XxrmG47qEtoysw4JqJaU1K6C-5a8oV1u2dky_OTm86CsN3XYFa-vjiSunJSMzwd4f1pRxHk1oaFlpizoS3Hkz8593NT8fZSI5w8Wvpi6rvDnGGIkLnKAH-ERZwpTTjtktS_qyjQIZwWuVSFlA_ntbKL0_wok"/>
+</div>
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-high">
+<img alt="Back" class="w-full h-full object-cover opacity-80" data-alt="Fitness back progress photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxCMLL8kJggRUx4FSh0RTFomfXKQfBX8bTCJ1tSlA17MafcnFVe73EOu67Q0ON2wLn2lxydwCZBUExcYZ7R4ULb31oyePjVG6rU4Be2dSPXMFvgZKhApwW9R0L4RX2_u38Rjrn5up8mX0cp-KdVJYr41OB8BjOBO9DvjP_aN7g0TFaBNIUS5r_UbAEQwUQtf64V7g92i9mCNNDDYZNA9vM53G7umZwrABzFy4mD8YOyJaLu0as7ggAl_A4g3IX6cbqK0pfF5IklZk"/>
+</div>
+</div>
+<div class="flex justify-between items-center px-2">
+<div>
+<p class="font-bold">Feb 24, 2024</p>
+<p class="text-xs text-on-surface-variant">Session #14 • Focused</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="bg-surface-container p-4 rounded-3xl group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="grid grid-cols-3 gap-2 mb-4">
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-high">
+<img alt="Front" class="w-full h-full object-cover grayscale-[0.3]" data-alt="Older progress photo front" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMAnWvOT5VR8e2LVjC6aCrmwAdO4qYnX9ULrfz5kaMDUQ7urYYTHdFHEDTY37G4eaxMZ_ujjbzBnMQYDUlFEtul9ZjNKx9Iz4yceoeDLcB9SoIlgETqP8qUF0YwdHioesN6cD2UDLOk3lo61MpgBPuZV8SumwMGMRCx0-aUBGgSPxTTodU4Bm1ZYKlSYveY1W5s0zqNXMoxAyPWo31g0zK5--M5C_rC3I7lHO_fWyawiGQj0YqvtxBxR0QKh8urESqYixSRvIGjfE"/>
+</div>
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-high">
+<div class="w-full h-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">hide_image</span>
+</div>
+</div>
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-container-high">
+<div class="w-full h-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">hide_image</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center px-2">
+<div>
+<p class="font-bold">Jan 12, 2024</p>
+<p class="text-xs text-on-surface-variant">Baseline Capture</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Add Placeholder for New -->
+<div class="border-2 border-dashed border-outline-variant/30 rounded-3xl flex flex-col items-center justify-center p-8 group cursor-pointer hover:border-primary/50 transition-all">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">add_a_photo</span>
+</div>
+<p class="font-bold text-on-surface-variant group-hover:text-on-surface">Add New Set</p>
+<p class="text-[10px] uppercase tracking-widest text-outline-variant mt-1">Consistency is key</p>
+</div>
+</div>
+</section>
+<!-- Capture Tips / Guidance -->
+<section class="bg-[#241707] rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8 border border-[#947f68]/10">
+<div class="flex-1">
+<h3 class="text-tertiary-fixed text-2xl font-bold mb-3">Better Captures, Faster Results</h3>
+<p class="text-tertiary-fixed-dim/80 leading-relaxed text-sm mb-6 max-w-lg">
+                    Consistency in lighting and angle makes AI analysis 40% more accurate. We recommend capturing your sets every 14 days at the same time of day.
+                </p>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-2 text-xs font-bold text-tertiary-fixed">
+<span class="material-symbols-outlined text-sm">light_mode</span>
+                        Natural Lighting
+                    </div>
+<div class="flex items-center gap-2 text-xs font-bold text-tertiary-fixed">
+<span class="material-symbols-outlined text-sm">straighten</span>
+                        Phone at Navel Height
+                    </div>
+<div class="flex items-center gap-2 text-xs font-bold text-tertiary-fixed">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                        Plain Background
+                    </div>
+</div>
+</div>
+<div class="w-full md:w-48 aspect-square rounded-2xl overflow-hidden">
+<img alt="Guidance context" class="w-full h-full object-cover grayscale opacity-50" data-alt="Minimalist gym setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhdgEDVkMd56iUaELrF6-DDeZyF1-w649nN8SA6vRQhrcP2MyMSZsY3Oy7GWVA_w2vXYQOFN4HLiIFrLzqKET-rIdRLirC0dqHpj0OcjDFPzS82iQtFMBRzqVdKn7DIM--ITQCpzgrUm40DlTVkldhPjXoVFy1v6jCawHlthUc-pQvtJ4lSpgV3SBK-5lM01f0L_irLGLFbAd8dSRLVzSSMbrkLEWcCf91-JL9sCJ1o_OPHwOdO-w1ez0UjB2fxu8DGbEJcS4-zx8"/>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-0 w-full z-50 flex justify-around items-center px-4">
+<div class="bg-[#31353c]/70 backdrop-blur-xl w-[92%] max-w-lg rounded-3xl flex justify-around items-center py-3 px-2 shadow-[0_32px_64px_-5px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dde1ff]" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[10px] uppercase tracking-[0.05em] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dde1ff]" href="#">
+<span class="material-symbols-outlined mb-1">restaurant</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[10px] uppercase tracking-[0.05em] font-bold">Nutrition</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dde1ff]" href="#">
+<span class="material-symbols-outlined mb-1">fitness_center</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[10px] uppercase tracking-[0.05em] font-bold">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#dde1ff] text-[#001356] rounded-2xl px-4 py-2 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[10px] uppercase tracking-[0.05em] font-bold">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dde1ff]" href="#">
+<span class="material-symbols-outlined mb-1">smart_toy</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[10px] uppercase tracking-[0.05em] font-bold">AI Coach</span>
+</a>
+</div>
+</nav>
+</body></html>

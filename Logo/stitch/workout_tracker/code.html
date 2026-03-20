@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Active Workout - AlfaTechLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#ffdad6",
+              "surface-container-lowest": "#0a0e14",
+              "tertiary-container": "#241707",
+              "on-secondary-fixed-variant": "#3f4755",
+              "error-container": "#93000a",
+              "on-tertiary-container": "#947f68",
+              "on-background": "#dfe2eb",
+              "on-surface": "#dfe2eb",
+              "background": "#10141a",
+              "surface": "#10141a",
+              "surface-container": "#1c2026",
+              "surface-bright": "#353940",
+              "primary": "#b8c3ff",
+              "surface-container-highest": "#31353c",
+              "outline-variant": "#45474c",
+              "on-tertiary": "#3d2e1c",
+              "primary-fixed-dim": "#b8c3ff",
+              "tertiary-fixed": "#f9dec3",
+              "on-surface-variant": "#c5c6cc",
+              "surface-tint": "#b8c3ff",
+              "secondary-fixed": "#dbe3f4",
+              "on-primary": "#002388",
+              "secondary-container": "#3f4755",
+              "secondary-fixed-dim": "#bfc7d7",
+              "secondary": "#bfc7d7",
+              "on-secondary": "#29313e",
+              "primary-fixed": "#dde1ff",
+              "on-primary-container": "#5777ff",
+              "inverse-surface": "#dfe2eb",
+              "inverse-on-surface": "#2d3137",
+              "surface-dim": "#10141a",
+              "tertiary": "#dbc2a9",
+              "surface-container-high": "#262a31",
+              "on-secondary-fixed": "#141c28",
+              "inverse-primary": "#124af0",
+              "tertiary-fixed-dim": "#dbc2a9",
+              "surface-variant": "#31353c",
+              "on-tertiary-fixed-variant": "#554430",
+              "outline": "#8f9096",
+              "on-primary-fixed-variant": "#0035be",
+              "on-primary-fixed": "#001356",
+              "on-secondary-container": "#adb5c6",
+              "on-error": "#690005",
+              "on-tertiary-fixed": "#261909",
+              "primary-container": "#001151",
+              "error": "#ffb4ab",
+              "surface-container-low": "#181c22"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-dim text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#1c2026]/70 backdrop-blur-md flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-gradient-to-b from-[#1c2026] to-transparent shadow-[0_32px_64px_-5px_rgba(223,226,235,0.04)]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center border border-outline-variant/10 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User athletic profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNqRCxkGXmN06WzQWXa_MjHaV-PQvmEw3HUfkVciU1idquv3DwI1J4KHYkvXfEETVOG5uajjtMiwaSOHML9JNOXvMHkPAnF0Cj5IsYX4LrKiA7Olm4UOBwGCGQ3bMk9FL5R6XLowaCKVK4evzhhLyqAhYVIZCmWNMF0DLYfiAiYq2-vTJ1qFh6209AwNIsBYcYzi06zRZ29Tvq41P8GHVb8-D3-7QDRp3Cp2P02kCjGE8rsqdZVeb4-_9npLSDBaqxO_QiWic6Hh8"/>
+</div>
+<span class="text-xl font-extrabold text-[#dfe2eb] tracking-tighter">Performance</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#adb5c6] hover:bg-[#31353c]/50 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+</button>
+<button class="text-[#b8c3ff] hover:bg-[#31353c]/50 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="px-6 pt-6 max-w-2xl mx-auto space-y-8">
+<!-- Active Exercise Hero (Asymmetric Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-12 bg-surface-container rounded-xl p-6 shadow-2xl relative overflow-hidden group">
+<!-- Atmospheric Background Gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+<div class="space-y-1">
+<span class="text-xs font-bold uppercase tracking-[0.15em] text-on-tertiary-container opacity-80">Current Exercise</span>
+<h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-on-background">Barbell Back Squat</h1>
+<div class="flex items-center gap-3 pt-2">
+<span class="bg-tertiary-container text-tertiary-fixed text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">High Effort</span>
+<span class="text-primary text-sm font-medium">Set 3 of 4</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="bg-surface-container-high px-4 py-2 rounded-lg backdrop-blur-md">
+<span class="text-xs font-bold uppercase tracking-widest text-outline block text-right">Rest Timer</span>
+<span class="text-2xl font-mono font-bold text-primary">00:45</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Performance Input Cards -->
+<div class="md:col-span-5 bg-surface-container-low rounded-xl p-6 flex flex-col justify-between">
+<label class="text-xs font-bold uppercase tracking-[0.05em] text-outline mb-4 block">Weight (KG)</label>
+<div class="flex items-center justify-between">
+<input class="bg-transparent border-none text-5xl font-extrabold tracking-tighter text-on-background p-0 focus:ring-0 w-32" type="number" value="120"/>
+<div class="flex flex-col gap-1">
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined">add_circle</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined">remove_circle</span></button>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-6 flex flex-col justify-between">
+<label class="text-xs font-bold uppercase tracking-[0.05em] text-outline mb-4 block">Reps</label>
+<div class="flex items-center justify-between">
+<input class="bg-transparent border-none text-5xl font-extrabold tracking-tighter text-on-background p-0 focus:ring-0 w-20" type="number" value="8"/>
+<div class="flex flex-col gap-1">
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined">expand_less</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined">expand_more</span></button>
+</div>
+</div>
+</div>
+<div class="md:col-span-3">
+<button class="w-full h-full min-h-[100px] bg-primary text-on-primary-fixed font-bold rounded-xl flex flex-col items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs uppercase tracking-widest">Finish Set</span>
+</button>
+</div>
+</section>
+<!-- Up Next Section -->
+<section class="space-y-6">
+<div class="flex justify-between items-center">
+<h2 class="text-xl font-bold tracking-tight text-on-background">Up Next</h2>
+<button class="text-primary text-sm font-semibold hover:opacity-80 transition-opacity">Edit Routine</button>
+</div>
+<div class="space-y-3">
+<!-- Exercise Item 1 -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">fitness_center</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-on-background">Romanian Deadlift</h3>
+<p class="text-xs text-on-secondary-container">4 Sets • 10-12 Reps</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity">drag_handle</span>
+</div>
+<!-- Exercise Item 2 -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">accessibility_new</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-on-background">Leg Press</h3>
+<p class="text-xs text-on-secondary-container">3 Sets • 15 Reps</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity">drag_handle</span>
+</div>
+<!-- Exercise Item 3 -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-low hover:bg-surface-container transition-colors rounded-xl opacity-60">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">directions_run</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-on-background">Calf Raises</h3>
+<p class="text-xs text-on-secondary-container">4 Sets • 20 Reps</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity">drag_handle</span>
+</div>
+</div>
+</section>
+<!-- Summary/Focus Stats -->
+<section class="bg-surface-container-highest/30 rounded-2xl p-6 grid grid-cols-2 gap-8">
+<div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-outline block mb-1">Total Volume</span>
+<span class="text-xl font-bold text-on-background">4,820 <span class="text-xs font-normal text-outline">kg</span></span>
+</div>
+<div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-outline block mb-1">Session Time</span>
+<span class="text-xl font-bold text-on-background">32:14</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-[#1c2026]/80 backdrop-blur-2xl rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.4)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]">
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#b8c3ff] font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="accessibility_new">accessibility_new</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Muscles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">AI Coach</span>
+</a>
+</nav>
+</body></html>

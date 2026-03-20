@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interactive Muscle Map - AlfaTechLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#947f68",
+                        "error-container": "#93000a",
+                        "on-primary-fixed-variant": "#0035be",
+                        "on-surface-variant": "#c5c6cc",
+                        "surface-container-lowest": "#0a0e14",
+                        "primary": "#b8c3ff",
+                        "inverse-primary": "#124af0",
+                        "on-secondary-container": "#adb5c6",
+                        "tertiary": "#dbc2a9",
+                        "on-secondary-fixed": "#141c28",
+                        "tertiary-fixed": "#f9dec3",
+                        "on-tertiary-fixed-variant": "#554430",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#dbc2a9",
+                        "on-secondary": "#29313e",
+                        "surface-container": "#1c2026",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#241707",
+                        "primary-container": "#001151",
+                        "on-primary-fixed": "#001356",
+                        "surface-variant": "#31353c",
+                        "secondary-container": "#3f4755",
+                        "secondary-fixed-dim": "#bfc7d7",
+                        "secondary": "#bfc7d7",
+                        "on-tertiary-fixed": "#261909",
+                        "background": "#10141a",
+                        "on-tertiary": "#3d2e1c",
+                        "surface-bright": "#353940",
+                        "surface-dim": "#10141a",
+                        "outline-variant": "#45474c",
+                        "surface-tint": "#b8c3ff",
+                        "surface-container-highest": "#31353c",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#3f4755",
+                        "outline": "#8f9096",
+                        "on-primary": "#002388",
+                        "surface-container-low": "#181c22",
+                        "primary-fixed": "#dde1ff",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "on-primary-container": "#5777ff",
+                        "on-surface": "#dfe2eb",
+                        "on-background": "#dfe2eb",
+                        "surface": "#10141a",
+                        "secondary-fixed": "#dbe3f4",
+                        "surface-container-high": "#262a31",
+                        "inverse-on-surface": "#2d3137",
+                        "inverse-surface": "#dfe2eb"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full bg-[#1c2026]/70 backdrop-blur-lg shadow-[0_32px_64px_-5px_rgba(223,226,235,0.04)] flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar athlete" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5PrNf17Gt2vtYtoOevtAP2NYt-VriMndYDH-62iFSUWVDGPpl9ufGn2bDqajJTDtOWbgvIpq5GKcQvwYn8vVmohjJKzDxPSYHOQXHoptMsv_dKD8AHVJb-3v4gnQVoY-d0u-9mUVmFWo_c_P-hhtlYHDMsv1YRZBzaVd9btafxbleiRsjVhCJoIJXdzxnMdceIIl_t-W4HaydM83-k-1tmN7jNq4bKbYVVSkjUCEfAPl4Jkw0B5QaTnrIiSikQlVbouOyxnkDf1E"/>
+</div>
+<h1 class="text-lg font-bold tracking-tighter text-[#dfe2eb] font-headline">AlfaTechLabs Fitness</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-[#b8c3ff] hover:bg-[#31353c] transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-6 max-w-7xl mx-auto space-y-8">
+<!-- Hero: Interactive Anatomy Model Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Sidebar Metrics -->
+<div class="lg:col-span-3 space-y-4">
+<div class="bg-surface-container-low p-6 rounded-xl space-y-6">
+<div>
+<p class="text-[10px] uppercase tracking-[0.05em] font-semibold text-on-secondary-container mb-1">Global Fatigue</p>
+<div class="flex items-end gap-2">
+<h2 class="text-4xl font-extrabold tracking-tight text-primary">68%</h2>
+<span class="text-on-tertiary-container text-xs mb-1 font-medium">Moderate</span>
+</div>
+<div class="mt-3 h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-on-primary-container w-[68%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center p-3 rounded-lg bg-surface-container-high">
+<span class="text-sm font-medium">Total Volume</span>
+<span class="text-sm font-bold text-primary">42.5k lbs</span>
+</div>
+<div class="flex justify-between items-center p-3 rounded-lg bg-surface-container-high">
+<span class="text-sm font-medium">Recovery Time</span>
+<span class="text-sm font-bold text-primary">14h 22m</span>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="bg-surface-container-low p-5 rounded-xl">
+<h3 class="text-xs uppercase tracking-widest font-bold text-on-secondary-container mb-4">Heatmap Legend</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-[#5777ff]"></div>
+<span class="text-xs text-on-surface-variant">Optimal / Rested</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-xs text-on-surface-variant">Active Load</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<span class="text-xs text-on-surface-variant">High Fatigue</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Central 3D Model View (Bento Card Style) -->
+<div class="lg:col-span-6 bg-surface-container rounded-2xl p-8 relative min-h-[500px] flex flex-col items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-container-lowest/50 pointer-events-none"></div>
+<div class="relative w-full flex justify-around items-center">
+<!-- Front View -->
+<div class="relative group">
+<img class="h-[400px] object-contain opacity-80 mix-blend-lighten filter grayscale brightness-150" data-alt="3D anatomical model of human front muscles with neon blue heatmap highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhBZ1sJYjKgIXraFn0EaTwkhE_2nWvsG4nR7iw9VOUfPtpZPITySFrbhtkAs_3znCYAzgtqt5u6x51iIlEcm8zEzAU61fkWAgYExPUjYRLvW70Qu9Km4-RLRO_6aRk11NfWq-5FNQ9uC1NnfXbV4YSIds8R2N1zGFoqA-ZfdXMvQEVos-9S1jAdbjQ-yCq6M9xEUGJ7wIH99jA1W_qH7YZhYSeVHJwzoDbvz--MBBttL7bRMfANE2xSYlwFeLZufotZ9h36vmTTyE"/>
+<!-- Heatmap Overlays (Simulated) -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-20 h-24 bg-primary/20 blur-xl rounded-full"></div>
+<div class="absolute bottom-1/4 left-1/4 w-12 h-32 bg-on-primary-container/30 blur-lg rounded-full"></div>
+</div>
+<!-- Back View -->
+<div class="relative group hidden md:block">
+<img class="h-[400px] object-contain opacity-60 mix-blend-lighten filter grayscale" data-alt="3D anatomical model of human back muscles with subtle heatmap highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBatZcpOdWnfkvhi8_E11Iphm7J-ufMdiLiun0lAGAZXxqeR0qs0-2JnCH4RKfh-wvHOqO21jUAA4LbMr_hLpvQM6hnXn0OJJQ5ePyuwWJrCZOA3yrYAB9se1NpviCwBFCC8nCdTTvTJpTFvAd7yLhoaVU-nb4UbyjB5U4WXWDwdSMYzCbIBplNOVHjNNXFWGKHs2be1uMC35uQD1nRxBeZR2Mhg0qdzdn8pFjToCTWnvsA7MzXeNdsoAWpjqvgXibqRG3F73efjgM"/>
+<div class="absolute top-1/3 right-1/4 w-16 h-20 bg-tertiary/20 blur-xl rounded-full"></div>
+</div>
+</div>
+<!-- Controls Overlay -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-surface-variant/70 backdrop-blur-xl px-4 py-2 rounded-full border border-outline-variant/15">
+<button class="p-2 text-primary hover:text-white transition-colors"><span class="material-symbols-outlined" data-icon="3d_rotation">3d_rotation</span></button>
+<div class="w-px h-4 bg-outline-variant/30"></div>
+<button class="text-xs font-bold uppercase tracking-widest text-primary">Front</button>
+<button class="text-xs font-bold uppercase tracking-widest text-on-secondary-container">Back</button>
+</div>
+</div>
+<!-- Detailed Breakdown -->
+<div class="lg:col-span-3 space-y-4">
+<h3 class="text-sm font-bold text-on-surface px-1">Top Load Groups</h3>
+<div class="space-y-3">
+<!-- Quadriceps -->
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-tertiary">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-sm font-bold">Quadriceps</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Legs • High Volume</p>
+</div>
+<span class="bg-tertiary-container text-tertiary text-[10px] px-2 py-1 rounded-full font-bold">92%</span>
+</div>
+<p class="text-xs text-on-secondary-container leading-relaxed">Fatigue critical. Suggested rest: 24h before heavy loading.</p>
+</div>
+<!-- Pectorals -->
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-primary">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-sm font-bold">Pectorals</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Chest • Moderate</p>
+</div>
+<span class="bg-primary-container text-primary text-[10px] px-2 py-1 rounded-full font-bold">45%</span>
+</div>
+<p class="text-xs text-on-secondary-container leading-relaxed">Optimal window for hypertrophy training session.</p>
+</div>
+<!-- Latissimus -->
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-on-primary-container">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-sm font-bold">Latissimus</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Back • Fresh</p>
+</div>
+<span class="bg-surface-container-high text-on-primary-container text-[10px] px-2 py-1 rounded-full font-bold">12%</span>
+</div>
+<p class="text-xs text-on-secondary-container leading-relaxed">Full recovery achieved. Ready for max effort output.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Insights & Action Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-surface-container-low p-8 rounded-3xl">
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-xs font-bold uppercase tracking-[0.1em]">AI Optimization Intelligence</span>
+</div>
+<h2 class="text-3xl font-extrabold tracking-tight leading-tight">Your next session should focus on <span class="text-primary">Pull &amp; Core</span>.</h2>
+<p class="text-on-secondary-container text-sm leading-relaxed max-w-md">
+                    Based on your 7-day fatigue heatmap and current muscle recovery status, we've identified a 22% strength deficit in your posterior chain that can be corrected today.
+                </p>
+</div>
+<div class="flex justify-end">
+<button class="group relative px-8 py-5 bg-primary-fixed text-on-primary-fixed font-bold rounded-xl flex items-center gap-3 transition-all hover:scale-[1.02] hover:shadow-[0_0_40px_-10px_rgba(184,195,255,0.4)] active:scale-95">
+<span>Generate Optimized Workout</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Historical Trend (Subtle Bento Card) -->
+<section class="bg-surface-container-low p-6 rounded-2xl">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-secondary-container">Weekly Load Trend</h3>
+<div class="flex gap-2">
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+<div class="h-2 w-2 rounded-full bg-surface-variant"></div>
+<div class="h-2 w-2 rounded-full bg-surface-variant"></div>
+</div>
+</div>
+<div class="flex items-end justify-between h-32 gap-2">
+<div class="w-full bg-surface-container-high rounded-t-lg h-[40%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-surface-container-high rounded-t-lg h-[60%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-primary rounded-t-lg h-[90%] hover:bg-primary/80 transition-colors"></div>
+<div class="w-full bg-surface-container-high rounded-t-lg h-[50%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-surface-container-high rounded-t-lg h-[30%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-surface-container-high rounded-t-lg h-[75%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-tertiary rounded-t-lg h-[95%] hover:bg-tertiary/80 transition-colors"></div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#1c2026]/80 backdrop-blur-xl shadow-2xl rounded-t-3xl border-none">
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="fitness_center">fitness_center</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#3f4755] text-[#b8c3ff] rounded-2xl px-4 py-2 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="accessibility_new">accessibility_new</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">Muscles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="insights">insights</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">AI Coach</span>
+</a>
+</nav>
+</body></html>

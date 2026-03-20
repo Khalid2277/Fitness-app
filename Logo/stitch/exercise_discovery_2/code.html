@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Exercise Discovery | AlfaTechLabs Fitness</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#947f68",
+              "error-container": "#93000a",
+              "on-primary-fixed-variant": "#0035be",
+              "on-surface-variant": "#c5c6cc",
+              "surface-container-lowest": "#0a0e14",
+              "primary": "#b8c3ff",
+              "inverse-primary": "#124af0",
+              "on-secondary-container": "#adb5c6",
+              "tertiary": "#dbc2a9",
+              "on-secondary-fixed": "#141c28",
+              "tertiary-fixed": "#f9dec3",
+              "on-tertiary-fixed-variant": "#554430",
+              "error": "#ffb4ab",
+              "tertiary-fixed-dim": "#dbc2a9",
+              "on-secondary": "#29313e",
+              "surface-container": "#1c2026",
+              "on-error-container": "#ffdad6",
+              "tertiary-container": "#241707",
+              "primary-container": "#001151",
+              "on-primary-fixed": "#001356",
+              "surface-variant": "#31353c",
+              "secondary-container": "#3f4755",
+              "secondary-fixed-dim": "#bfc7d7",
+              "secondary": "#bfc7d7",
+              "on-tertiary-fixed": "#261909",
+              "background": "#10141a",
+              "on-tertiary": "#3d2e1c",
+              "surface-bright": "#353940",
+              "surface-dim": "#10141a",
+              "outline-variant": "#45474c",
+              "surface-tint": "#b8c3ff",
+              "surface-container-highest": "#31353c",
+              "on-error": "#690005",
+              "on-secondary-fixed-variant": "#3f4755",
+              "outline": "#8f9096",
+              "on-primary": "#002388",
+              "surface-container-low": "#181c22",
+              "primary-fixed": "#dde1ff",
+              "primary-fixed-dim": "#b8c3ff",
+              "on-primary-container": "#5777ff",
+              "on-surface": "#dfe2eb",
+              "on-background": "#dfe2eb",
+              "surface": "#10141a",
+              "secondary-fixed": "#dbe3f4",
+              "surface-container-high": "#262a31",
+              "inverse-on-surface": "#2d3137",
+              "inverse-surface": "#dfe2eb"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full bg-[#1c2026]/70 backdrop-blur-lg shadow-[0_32px_64px_-5px_rgba(223,226,235,0.04)] font-['Plus_Jakarta_Sans'] antialiased tracking-tight">
+<div class="flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlSgFiUgDTZig98yB_eFrUMdUZPNejXZxKAsn_yJkZJ9piKNWTyTRLXt49heAU00cpcc7YXiBYFwjqCYWcnM9KiX0RSmAXzK9QXKffqrO-Le53oANae_Xq0WYGx5byRkHUNP0MUy2ezwI2h7GWVmYMtrZkvKEombHPzDQqw9pFUb3jU_ENbS2iwY-P5rjoa_qDMosqgLzcn_S0hV1rkaZTQZtGBHB70yfFto1X48ocPaB4JoBYoe1zEjiIOJQEu7dCPLhbKypyMWQ"/>
+</div>
+<h1 class="text-lg font-bold tracking-tighter text-[#dfe2eb]">AlfaTechLabs Fitness</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-8">
+<span class="text-[#adb5c6] font-semibold text-sm hover:text-[#dfe2eb] transition-colors cursor-pointer">Home</span>
+<span class="text-[#b8c3ff] font-semibold text-sm transition-colors cursor-pointer border-b-2 border-[#b8c3ff] pb-1">Workouts</span>
+<span class="text-[#adb5c6] font-semibold text-sm hover:text-[#dfe2eb] transition-colors cursor-pointer">Muscles</span>
+<span class="text-[#adb5c6] font-semibold text-sm hover:text-[#dfe2eb] transition-colors cursor-pointer">Progress</span>
+</nav>
+<button class="p-2 rounded-xl text-[#b8c3ff] hover:bg-[#31353c] transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-28 pb-32 px-6 max-w-7xl mx-auto">
+<!-- Hero Search Section -->
+<section class="mb-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="max-w-2xl">
+<span class="text-primary font-label text-sm uppercase tracking-[0.2em] mb-4 block">Discovery Library</span>
+<h2 class="text-5xl md:text-7xl font-headline font-extrabold tracking-tighter mb-6 leading-[0.9]">Master Your <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-on-primary-container">Technique.</span></h2>
+<p class="text-on-secondary-container text-lg max-w-md">Browse our curated gallery of professional-grade movements designed for peak performance.</p>
+</div>
+<div class="w-full md:w-96">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Find an exercise..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Filters Grid -->
+<section class="mb-12">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2">
+<button class="px-6 py-2.5 bg-primary text-on-primary-fixed rounded-full font-semibold text-sm whitespace-nowrap">All Exercises</button>
+<button class="px-6 py-2.5 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold text-sm whitespace-nowrap transition-colors">Chest</button>
+<button class="px-6 py-2.5 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold text-sm whitespace-nowrap transition-colors">Back</button>
+<button class="px-6 py-2.5 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold text-sm whitespace-nowrap transition-colors">Legs</button>
+<button class="px-6 py-2.5 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold text-sm whitespace-nowrap transition-colors">Shoulders</button>
+<button class="px-6 py-2.5 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold text-sm whitespace-nowrap transition-colors">Arms</button>
+<button class="px-6 py-2.5 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold text-sm whitespace-nowrap transition-colors">Core</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">fitness_center</span>
+<div>
+<p class="text-xs uppercase tracking-widest text-on-secondary-container font-bold">Equipment</p>
+<p class="text-sm font-semibold">Dumbbells, Barbell...</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">speed</span>
+<div>
+<p class="text-xs uppercase tracking-widest text-on-secondary-container font-bold">Intensity</p>
+<p class="text-sm font-semibold">Intermediate to Pro</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">filter_list</span>
+<div>
+<p class="text-xs uppercase tracking-widest text-on-secondary-container font-bold">Sort By</p>
+<p class="text-sm font-semibold">Most Popular</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Exercise Gallery (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Featured Card (Large) -->
+<div class="md:col-span-8 bg-surface-container rounded-3xl overflow-hidden relative group h-[500px]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="Man performing heavy barbell back squats" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_Ekbmv48yllqO-kkqRsw3_KgU636vt5_B4qmAVbnKKa3vSbV6O8z0ZcKgsbEzOICClcREfXTsKv06r_HnPws4o1AoeRw-FkeQReEWn3Sny0FhpZHkkvQe7QsKzoeonQxJFjbN7ga0-on1Wh-kr6XfoZ1xDIWF48eOESzgFziurdrWYwaQhXdJcmakEX55U6Y3TENmVHTeOkDgyp4zxgndJUSlEqXAEhMR5zEovQ9VLIk98tNRGvT8RkGoVjmpVTPFtOHi-xmki9Y"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute top-6 left-6 flex gap-2">
+<span class="bg-primary/20 backdrop-blur-md text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Featured</span>
+<span class="bg-tertiary-container/40 backdrop-blur-md text-tertiary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">High Intensity</span>
+</div>
+<div class="absolute bottom-8 left-8 right-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h3 class="text-4xl font-headline font-black tracking-tighter mb-2">Barbell Back Squat</h3>
+<div class="flex items-center gap-4 text-on-secondary-container">
+<span class="flex items-center gap-1.5 text-sm font-medium"><span class="material-symbols-outlined text-sm">accessibility_new</span> Quads, Glutes</span>
+<span class="flex items-center gap-1.5 text-sm font-medium"><span class="material-symbols-outlined text-sm">timer</span> 4 Sets • 8-12 Reps</span>
+</div>
+</div>
+<button class="bg-primary text-on-primary-fixed px-8 py-4 rounded-2xl font-bold flex items-center gap-2 hover:bg-primary-fixed transition-colors active:scale-95 duration-200 shadow-xl shadow-primary/10">
+<span class="material-symbols-outlined">add_circle</span>
+                            Quick Add
+                        </button>
+</div>
+</div>
+</div>
+<!-- Side Card (Vertical) -->
+<div class="md:col-span-4 bg-surface-container-low rounded-3xl p-8 flex flex-col justify-between group cursor-pointer hover:bg-surface-container transition-all">
+<div>
+<div class="w-16 h-16 rounded-2xl bg-surface-container-high flex items-center justify-center mb-8 group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary">bolt</span>
+</div>
+<h3 class="text-3xl font-headline font-bold tracking-tight mb-4 leading-tight">Elite Performance Protocol</h3>
+<p class="text-on-secondary-container leading-relaxed">Unlock advanced hypertrophy secrets with our AI-guided intensity techniques. Optimized for intermediate athletes.</p>
+</div>
+<div class="mt-8">
+<div class="flex -space-x-3 mb-4">
+<img class="w-10 h-10 rounded-full border-4 border-surface-container-low object-cover" data-alt="Fitness instructor profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDqlnvCTr9w2UxWHUrmkfEyGXQguO8IBPhW2Y68nUBRFQJqymRf1ZVVhkPNQdqYNcPgtwaKtCmfb6xEyZApM9hi-9PbjgO0G0mV8tf09na879Ft1M46rhwi5ZWWi8EHxtzivHdU5boM7LniLmyzU0vLwCJCXlAToUMJcmOXTJrr6iljQJrCvqpr77Z7IUAX4gk3ZwkfUK7X_mt1DA7eYjSjKakyh9NdVHGsWUuAb0iGhFXP_tWcQEiLuW5w78JH5rEhfIFoZvKX-w"/>
+<img class="w-10 h-10 rounded-full border-4 border-surface-container-low object-cover" data-alt="Male bodybuilder profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaxJVvM7doyKca0QSKnWJlrTZwH0HjLotIn6-vkZy8s3ST4OfF-ct2oknA3UQzs2XY5BvOXwCsUPgpcmIkMiG4NWfFLlGP7wfwNJVu8IYmTq1oABy7V5qBhQkFqdfLG3uqVjNHZJJcakrDojj8DgvbaxYb6ujKrXzIdtm7f4BxlBxgIHKuklzz1qaXNeUb_Y9-FFy2P9xP-JklNZJY3c3r5WCApz3ulPlBw_lJcuRd-L66DL5cMOY89zi5FQS47p3hIxdyCrsPngw"/>
+<div class="w-10 h-10 rounded-full border-4 border-surface-container-low bg-surface-container-high flex items-center justify-center text-xs font-bold text-primary">+12k</div>
+</div>
+<p class="text-xs font-bold uppercase tracking-widest text-outline">Active Users This Week</p>
+</div>
+</div>
+<!-- Grid Items -->
+<div class="md:col-span-4 group">
+<div class="bg-surface-container-low rounded-3xl overflow-hidden mb-4 relative aspect-[4/5]">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Person performing weighted chest dips" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvOtvHBt6zfMTzrWbycGH5skT1omNubbuIlbme84jiRth4p8zJH6N1xkPAqLIr6157a3p9OkCyaoTIrc7u5R7plc3aZ-IT2Pt5jAyRDTQHs5OJb47aYueeiqHz4MREgtfC3qUwndOGtUAz_7c3gLYoH0ZaoT5-ZveNX08XqOoB_p8ruFx4_-JtrR4_SXJQF4NvB2j0eo9542Dsz8IX3lfUVDn7JhmMSP7CeXek0XF7Yt19xKC5aGFeHenkTAKy1nynUgCqdtTYBXo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<button class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<h4 class="text-xl font-bold mb-1">Weighted Chest Dips</h4>
+<p class="text-on-secondary-container text-sm">Target: Pectorals, Triceps</p>
+</div>
+<div class="md:col-span-4 group">
+<div class="bg-surface-container-low rounded-3xl overflow-hidden mb-4 relative aspect-[4/5]">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Dumbbell lateral raises demonstration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCra6B68po0mumvqWCB_AliB90AZKxi7qN1rQXeqTEAYycj5hINA9uqHV2XOApTrQ2mypWbU2OR92ihEoHlYgEH3FaOJLUptT42mglaN3MdTqN2wiLf_FDdgxmYJENkvmTTZiif7cvS9EmGvTv-R6B-hZOW3T1UsdvgAFLsK5l_4frfHb7TjOMtKHlYsXz2H45JAdpcRhljQ1JlXCWRUmcGNCXV4coqLPempJK7bNdQWl6ZnKDxxicz8AtVx9RvhsDNb_kJTKm1-EU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<button class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<h4 class="text-xl font-bold mb-1">Lateral Raises</h4>
+<p class="text-on-secondary-container text-sm">Target: Lateral Deltoids</p>
+</div>
+<div class="md:col-span-4 group">
+<div class="bg-surface-container-low rounded-3xl overflow-hidden mb-4 relative aspect-[4/5]">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Deadlift technique demonstration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0w8e_LJ4-fFw9BGdCjXMADR6h6feEqZOEWYN9nweAvZ-zkCbnPHrAkM9nxFKZtasy7tsYSm8TJpTD2DMWcNUgt7vVhL6dDQ8cydyGg6Cu0HdjTMEDvMPs82fOW3wjSB79eMTBUtRePdlWoglFW7edVXhJoRjtX5GkcLazo67Kpz8tqqX9LI-w93tC-Z2WtgKqr08Z30D5KH2JiwtzpAQ9a1no50dzl9MtsttbVjDOD1h5IYIUmKAQg3EQNqCxZREJU7xZah_b2_c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<button class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<h4 class="text-xl font-bold mb-1">Conventional Deadlift</h4>
+<p class="text-on-secondary-container text-sm">Target: Posterior Chain</p>
+</div>
+</div>
+<!-- Call to Action -->
+<section class="mt-20 p-12 bg-gradient-to-br from-surface-container to-surface-container-low rounded-[2rem] border border-outline-variant/10 relative overflow-hidden">
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+<div>
+<h2 class="text-4xl font-headline font-black tracking-tight mb-4">Can't find an exercise?</h2>
+<p class="text-on-secondary-container max-w-lg">Our AI Coach can generate custom variations or analyze your own movement videos for better technique refinement.</p>
+</div>
+<button class="whitespace-nowrap bg-secondary-container text-on-secondary-container px-10 py-5 rounded-2xl font-bold hover:bg-surface-variant transition-all hover:text-on-surface">Talk to AI Coach</button>
+</div>
+<!-- Decorative atmospheric light -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-on-primary-container/5 blur-[120px] rounded-full"></div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#1c2026]/80 backdrop-blur-xl md:hidden rounded-t-3xl shadow-2xl font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">
+<div class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1">home</span>
+<span>Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#3f4755] text-[#b8c3ff] rounded-2xl px-4 py-2 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1">fitness_center</span>
+<span>Workouts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1">accessibility_new</span>
+<span>Muscles</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1">insights</span>
+<span>Progress</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined mb-1">smart_toy</span>
+<span>AI Coach</span>
+</div>
+</nav>
+<!-- FAB -->
+<button class="fixed right-6 bottom-32 md:bottom-12 w-16 h-16 bg-primary text-on-primary-fixed rounded-2xl shadow-2xl flex items-center justify-center z-40 active:scale-90 transition-transform shadow-primary/20">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

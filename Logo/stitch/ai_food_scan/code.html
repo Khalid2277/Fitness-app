@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Food Scan - AlfaTechLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#ffdad6",
+              "surface-container-lowest": "#0a0e14",
+              "tertiary-container": "#241707",
+              "on-secondary-fixed-variant": "#3f4755",
+              "error-container": "#93000a",
+              "on-tertiary-container": "#947f68",
+              "on-background": "#dfe2eb",
+              "on-surface": "#dfe2eb",
+              "background": "#10141a",
+              "surface": "#10141a",
+              "surface-container": "#1c2026",
+              "surface-bright": "#353940",
+              "primary": "#b8c3ff",
+              "surface-container-highest": "#31353c",
+              "outline-variant": "#45474c",
+              "on-tertiary": "#3d2e1c",
+              "primary-fixed-dim": "#b8c3ff",
+              "tertiary-fixed": "#f9dec3",
+              "on-surface-variant": "#c5c6cc",
+              "surface-tint": "#b8c3ff",
+              "secondary-fixed": "#dbe3f4",
+              "on-primary": "#002388",
+              "secondary-container": "#3f4755",
+              "secondary-fixed-dim": "#bfc7d7",
+              "secondary": "#bfc7d7",
+              "on-secondary": "#29313e",
+              "primary-fixed": "#dde1ff",
+              "on-primary-container": "#5777ff",
+              "inverse-surface": "#dfe2eb",
+              "inverse-on-surface": "#2d3137",
+              "surface-dim": "#10141a",
+              "tertiary": "#dbc2a9",
+              "surface-container-high": "#262a31",
+              "on-secondary-fixed": "#141c28",
+              "inverse-primary": "#124af0",
+              "tertiary-fixed-dim": "#dbc2a9",
+              "surface-variant": "#31353c",
+              "on-tertiary-fixed-variant": "#554430",
+              "outline": "#8f9096",
+              "on-primary-fixed-variant": "#0035be",
+              "on-primary-fixed": "#001356",
+              "on-secondary-container": "#adb5c6",
+              "on-error": "#690005",
+              "on-tertiary-fixed": "#261909",
+              "primary-container": "#001151",
+              "error": "#ffb4ab",
+              "surface-container-low": "#181c22"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .viewfinder-mask {
+        clip-path: polygon(0% 0%, 0% 100%, 10% 100%, 10% 10%, 90% 10%, 90% 90%, 10% 90%, 10% 100%, 100% 100%, 100% 0%);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest text-on-surface font-body min-h-screen flex flex-col overflow-hidden">
+<!-- Top App Bar (Shared Component Strategy) -->
+<header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#1c2026]/70 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-[#31353c]/50 transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline text-lg font-bold tracking-tight text-primary">Performance</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xl font-extrabold text-[#dfe2eb] tracking-tighter">ALFA</span>
+<span class="material-symbols-outlined text-primary">notifications</span>
+</div>
+</header>
+<!-- Main Viewfinder Section -->
+<main class="relative flex-grow flex flex-col items-center justify-center overflow-hidden">
+<!-- Mock Camera Viewfinder Background -->
+<div class="absolute inset-0 z-0">
+<img alt="Food Subject" class="w-full h-full object-cover" data-alt="Top down view of a healthy grilled salmon bowl with vegetables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCop8OgsIZNHs1FWbe5e1gnQchTQA58Vb6BmtSzLZ1tWPvXQQpMq2xudHxen5VvB82rnZMsuhyllbLjK9-Fy-4xrW5zuICk1UzlWLJA1HDg75Xiup6p4sOZE6e5BFNi8kvep7OmVJvkkd4bvcd4WdCi6kFD_3HG2EeHaDzXhC52rft3geN0oBS4f7e0Ck-7VftlHwsAgjwN52oFTRHGbYYT_LLkrPxMMPvGXqgokQH2TxKfng_rxomLcSTZ1bP47ww6PVxbevRZjc"/>
+<!-- Matte Overlay to simulate camera depth -->
+<div class="absolute inset-0 bg-surface-container-lowest/20 backdrop-grayscale-[0.2]"></div>
+</div>
+<!-- Scanning HUD UI -->
+<div class="absolute inset-0 z-10 pointer-events-none flex flex-col items-center justify-center">
+<!-- Viewfinder Corners -->
+<div class="relative w-72 h-72 md:w-96 md:h-96">
+<!-- Top Left -->
+<div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary rounded-tl-xl opacity-60"></div>
+<!-- Top Right -->
+<div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary rounded-tr-xl opacity-60"></div>
+<!-- Bottom Left -->
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-primary rounded-bl-xl opacity-60"></div>
+<!-- Bottom Right -->
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary rounded-br-xl opacity-60"></div>
+<!-- Analysis Points (Asymmetric UI) -->
+<div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-pulse opacity-80"></div>
+<div class="absolute bottom-1/3 right-1/4 w-1.5 h-1.5 bg-primary/40 rounded-full"></div>
+<!-- Scanning Bar (Subtle Matte Line) -->
+<div class="absolute left-4 right-4 h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent top-1/2 translate-y-12"></div>
+</div>
+<div class="mt-8 px-4 py-2 bg-surface-container-high/80 backdrop-blur-md rounded-full border border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">analytics</span>
+                    Analyzing Composition...
+                </p>
+</div>
+</div>
+<!-- Detected Result Card (Floating Matte Surface) -->
+<div class="absolute bottom-32 left-6 right-6 z-20 md:max-w-md md:mx-auto">
+<div class="bg-surface-container/90 backdrop-blur-2xl p-5 rounded-[1.5rem] shadow-[0_32px_64px_-5px_rgba(0,0,0,0.4)] border border-outline-variant/5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 bg-primary rounded-full"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-secondary-container">98% Match</span>
+</div>
+<h2 class="font-headline text-xl font-bold tracking-tight text-on-surface">Grilled Salmon Bowl</h2>
+</div>
+<button class="bg-primary text-on-primary-fixed w-10 h-10 rounded-full flex items-center justify-center hover:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+<!-- Macro Bento Grid -->
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-surface-container-low p-3 rounded-xl flex flex-col items-center justify-center text-center">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-tertiary-container mb-1">Calories</p>
+<p class="font-headline text-lg font-extrabold text-on-surface">540</p>
+<p class="text-[9px] text-outline">kcal</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl flex flex-col items-center justify-center text-center">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-tertiary-container mb-1">Protein</p>
+<p class="font-headline text-lg font-extrabold text-primary">42g</p>
+<p class="text-[9px] text-outline">high target</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl flex flex-col items-center justify-center text-center">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-tertiary-container mb-1">Carbs</p>
+<p class="font-headline text-lg font-extrabold text-on-surface">36g</p>
+<p class="text-[9px] text-outline">low gi</p>
+</div>
+</div>
+<!-- Meta Info -->
+<div class="mt-4 flex items-center justify-between text-on-secondary-container">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span class="text-[11px] font-medium">Standard Portion (320g)</span>
+</div>
+<button class="text-[11px] font-bold text-primary flex items-center gap-1 hover:opacity-80">
+                        Edit details
+                        <span class="material-symbols-outlined text-xs">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar (Shared Component Strategy) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-[#1c2026]/80 backdrop-blur-2xl rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined">accessibility_new</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Muscles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#b8c3ff] font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest mt-1">AI Coach</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlfaTechLabs AI Coach</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#ffdad6",
+              "surface-container-lowest": "#0a0e14",
+              "tertiary-container": "#241707",
+              "on-secondary-fixed-variant": "#3f4755",
+              "error-container": "#93000a",
+              "on-tertiary-container": "#947f68",
+              "on-background": "#dfe2eb",
+              "on-surface": "#dfe2eb",
+              "background": "#10141a",
+              "surface": "#10141a",
+              "surface-container": "#1c2026",
+              "surface-bright": "#353940",
+              "primary": "#b8c3ff",
+              "surface-container-highest": "#31353c",
+              "outline-variant": "#45474c",
+              "on-tertiary": "#3d2e1c",
+              "primary-fixed-dim": "#b8c3ff",
+              "tertiary-fixed": "#f9dec3",
+              "on-surface-variant": "#c5c6cc",
+              "surface-tint": "#b8c3ff",
+              "secondary-fixed": "#dbe3f4",
+              "on-primary": "#002388",
+              "secondary-container": "#3f4755",
+              "secondary-fixed-dim": "#bfc7d7",
+              "secondary": "#bfc7d7",
+              "on-secondary": "#29313e",
+              "primary-fixed": "#dde1ff",
+              "on-primary-container": "#5777ff",
+              "inverse-surface": "#dfe2eb",
+              "inverse-on-surface": "#2d3137",
+              "surface-dim": "#10141a",
+              "tertiary": "#dbc2a9",
+              "surface-container-high": "#262a31",
+              "on-secondary-fixed": "#141c28",
+              "inverse-primary": "#124af0",
+              "tertiary-fixed-dim": "#dbc2a9",
+              "surface-variant": "#31353c",
+              "on-tertiary-fixed-variant": "#554430",
+              "outline": "#8f9096",
+              "on-primary-fixed-variant": "#0035be",
+              "on-primary-fixed": "#001356",
+              "on-secondary-container": "#adb5c6",
+              "on-error": "#690005",
+              "on-tertiary-fixed": "#261909",
+              "primary-container": "#001151",
+              "error": "#ffb4ab",
+              "surface-container-low": "#181c22"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #10141a;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#1c2026]/70 backdrop-blur-md flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-gradient-to-b from-[#1c2026] to-transparent shadow-[0_32px_64px_-5px_rgba(223,226,235,0.04)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Modern high-performance user profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6Buni_nxVGdIMlDqZ0Os017qr0CeI4-B4ygoi8eL5HNNjbD-h9VZs_9fHJ0Xj7g5l7MyYpG_UhiQNLGUjjGPCs-TEHbFqHjfxoSNrJiJMI7g0Uxol217Fog3TJI0T8CB-QAGYECSJYR0_CAhRsdkicby6CECcwfeeyWr6KUjB7J1Kf7xc4hAV7-TUp7WfzFHx_5LjviovZNUvT8FCXt1fGFt1beI1eLkdOSIllW4I3YZQ0LFyKgCjDRh5bjPYTdEDDS-_bSHzwTQ"/>
+</div>
+<span class="text-xl font-extrabold text-[#dfe2eb] tracking-tighter">AI Coach</span>
+</div>
+<div class="flex bg-surface-container-low p-1 rounded-full items-center">
+<button class="px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all bg-surface-container-high text-primary">Trainer</button>
+<button class="px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-on-secondary-container hover:text-on-surface">Nutritionist</button>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#31353c]/50 transition-colors">
+<span class="material-symbols-outlined text-[#b8c3ff]" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content: Chat Interface -->
+<main class="flex-1 flex flex-col max-w-3xl mx-auto w-full px-6 pt-6 pb-32">
+<!-- Welcome Message / System Info -->
+<div class="flex flex-col items-center mb-10 text-center">
+<div class="w-16 h-16 rounded-3xl bg-surface-container-high flex items-center justify-center mb-4 shadow-xl">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="smart_toy">smart_toy</span>
+</div>
+<h1 class="text-2xl font-bold tracking-tight text-on-background mb-1">AlfaTechLabs AI</h1>
+<p class="text-on-secondary-container text-sm">Powered by biometric data &amp; performance logs</p>
+</div>
+<!-- Conversation Stream -->
+<div class="space-y-8 flex-1">
+<!-- AI Message -->
+<div class="flex flex-col items-start gap-3">
+<div class="max-w-[85%] bg-surface-container rounded-2xl rounded-tl-none p-5 shadow-sm border-l-2 border-primary/20">
+<p class="text-on-surface leading-relaxed font-medium">Good morning, Alex. Based on your Oura Ring sync, your Recovery Score is 88%, but your muscle strain from yesterday's heavy lifting is elevated.</p>
+</div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-outline ml-1">AI Trainer • 08:30 AM</span>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-3">
+<div class="max-w-[85%] bg-primary-container text-on-primary-container rounded-2xl rounded-tr-none p-5 shadow-lg bg-gradient-to-br from-primary/10 to-transparent">
+<p class="leading-relaxed font-medium">Should I skip today's cardio? I'm feeling a bit stiff in the lower back.</p>
+</div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-outline mr-1">You • 08:32 AM</span>
+</div>
+<!-- AI Insight Message (Smart Tip) -->
+<div class="flex flex-col items-start gap-3">
+<div class="max-w-[85%] bg-surface-container rounded-2xl rounded-tl-none p-5 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+<div class="flex items-center gap-2 mb-3 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Smart Recovery Tip</span>
+</div>
+<p class="text-on-surface leading-relaxed font-medium mb-4">Your recovery suggests focusing on mobility today. Want a 10-min routine? It focuses on spinal decompression and hip openers to alleviate that stiffness.</p>
+<button class="bg-primary text-on-primary-fixed font-bold py-2.5 px-5 rounded-xl text-sm hover:opacity-90 transition-all flex items-center gap-2">
+                        Start Routine
+                        <span class="material-symbols-outlined text-sm" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-outline ml-1">AI Trainer • 08:32 AM</span>
+</div>
+</div>
+</main>
+<!-- Floating Input & Suggested Prompts -->
+<div class="fixed bottom-24 left-0 w-full px-6 flex flex-col items-center gap-4 z-40 pointer-events-none">
+<!-- Suggested Prompts -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar w-full max-w-2xl pointer-events-auto">
+<button class="whitespace-nowrap bg-surface-container-high/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/5 text-sm text-on-surface hover:bg-surface-bright transition-all">
+                "Show mobility video"
+            </button>
+<button class="whitespace-nowrap bg-surface-container-high/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/5 text-sm text-on-surface hover:bg-surface-bright transition-all">
+                "Analyze my sleep"
+            </button>
+<button class="whitespace-nowrap bg-surface-container-high/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/5 text-sm text-on-surface hover:bg-surface-bright transition-all">
+                "Adjust macro goals"
+            </button>
+</div>
+<!-- Input Bar -->
+<div class="w-full max-w-2xl bg-surface-container-highest/90 backdrop-blur-2xl rounded-2xl p-2 flex items-center gap-2 shadow-2xl pointer-events-auto ring-1 ring-white/10">
+<button class="w-10 h-10 flex items-center justify-center text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline/60 py-3 text-sm" placeholder="Ask about your performance..." type="text"/>
+<button class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary-fixed shadow-[0_0_20px_rgba(184,195,255,0.3)]">
+<span class="material-symbols-outlined" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-[#1c2026]/80 backdrop-blur-2xl rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.4)] no-border">
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="accessibility_new">accessibility_new</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Muscles</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#45474c] hover:text-[#dfe2eb] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#b8c3ff] font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-plus-jakarta-sans text-[10px] uppercase tracking-widest font-bold mt-1">AI Coach</span>
+</a>
+</nav>
+</body></html>

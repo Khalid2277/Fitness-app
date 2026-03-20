@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "AlfaNutrition iOS Simulator (iPhone 16 Pro Max)",
+      "runtimeExecutable": "flutter",
+      "runtimeArgs": ["run", "-d", "35E23667-FA8F-4F46-9354-EC672BCBBBC6"],
+      "port": 0
+    },
+    {
+      "name": "AlfaNutrition iOS Simulator (iPhone 17 Pro Max)",
+      "runtimeExecutable": "flutter",
+      "runtimeArgs": ["run", "-d", "DE3625CF-A719-4C41-BA8D-536F8C93EE5B"],
+      "port": 0
+    }
+  ]
+}

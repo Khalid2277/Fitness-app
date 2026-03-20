@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Progress Tracking | AlfaTechLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#947f68",
+              "error-container": "#93000a",
+              "on-primary-fixed-variant": "#0035be",
+              "on-surface-variant": "#c5c6cc",
+              "surface-container-lowest": "#0a0e14",
+              "primary": "#b8c3ff",
+              "inverse-primary": "#124af0",
+              "on-secondary-container": "#adb5c6",
+              "tertiary": "#dbc2a9",
+              "on-secondary-fixed": "#141c28",
+              "tertiary-fixed": "#f9dec3",
+              "on-tertiary-fixed-variant": "#554430",
+              "error": "#ffb4ab",
+              "tertiary-fixed-dim": "#dbc2a9",
+              "on-secondary": "#29313e",
+              "surface-container": "#1c2026",
+              "on-error-container": "#ffdad6",
+              "tertiary-container": "#241707",
+              "primary-container": "#001151",
+              "on-primary-fixed": "#001356",
+              "surface-variant": "#31353c",
+              "secondary-container": "#3f4755",
+              "secondary-fixed-dim": "#bfc7d7",
+              "secondary": "#bfc7d7",
+              "on-tertiary-fixed": "#261909",
+              "background": "#10141a",
+              "on-tertiary": "#3d2e1c",
+              "surface-bright": "#353940",
+              "surface-dim": "#10141a",
+              "outline-variant": "#45474c",
+              "surface-tint": "#b8c3ff",
+              "surface-container-highest": "#31353c",
+              "on-error": "#690005",
+              "on-secondary-fixed-variant": "#3f4755",
+              "outline": "#8f9096",
+              "on-primary": "#002388",
+              "surface-container-low": "#181c22",
+              "primary-fixed": "#dde1ff",
+              "primary-fixed-dim": "#b8c3ff",
+              "on-primary-container": "#5777ff",
+              "on-surface": "#dfe2eb",
+              "on-background": "#dfe2eb",
+              "surface": "#10141a",
+              "secondary-fixed": "#dbe3f4",
+              "surface-container-high": "#262a31",
+              "inverse-on-surface": "#2d3137",
+              "inverse-surface": "#dfe2eb"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-dim text-on-surface selection:bg-primary selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full bg-[#1c2026]/70 backdrop-blur-lg shadow-[0_32px_64px_-5px_rgba(223,226,235,0.04)] px-6 py-4 flex justify-between items-center font-['Plus_Jakarta_Sans'] antialiased tracking-tight">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/15">
+<img class="w-full h-full object-cover" data-alt="Close up of a professional athlete profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXY7NYZ8vKNDfPejkG8LALSeYsVfHY4GQsaeZ8PoI49UJbh5s_F7CsBH88pbDxKWl-RzdMHkKPuUUoamnoB7QGa-KV4iqHvw5jE_pQb-aNSIC68gIUiKhlMQ6j2HtkkP6wrGWymHLYdZ0m8BoCn7C7f50Rn59B6ERup2rEv-F4PhsiyR5cmaLBjd104biIPAtKb43a-dWTftjxxs7UMilLI6F_hTNTmUsQW9lGdZke1fuhWjmAEUVkmjaBSd8gq45kCTCL_wK7tCI"/>
+</div>
+<span class="text-lg font-bold tracking-tighter text-[#dfe2eb]">AlfaTechLabs Fitness</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-xl text-[#adb5c6] hover:bg-[#31353c] transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-7xl mx-auto space-y-8">
+<!-- Hero Metrics: Asymmetric Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<!-- Large Focus Metric -->
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between min-h-[320px] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<div>
+<span class="label-sm uppercase tracking-[0.05em] text-on-secondary-container font-semibold">Weight Trend</span>
+<h2 class="text-5xl font-extrabold tracking-tight mt-2 text-primary">78.4 <span class="text-xl font-normal text-outline">kg</span></h2>
+<p class="text-on-surface-variant mt-2 max-w-xs">-1.2kg from last week. You are approaching your target weight.</p>
+</div>
+<!-- Interactive Graph Area (Visual Representation) -->
+<div class="mt-8 h-32 w-full flex items-end gap-2">
+<div class="flex-1 bg-surface-container-high h-2/3 rounded-t-lg transition-all hover:bg-primary/20"></div>
+<div class="flex-1 bg-surface-container-high h-1/2 rounded-t-lg transition-all hover:bg-primary/20"></div>
+<div class="flex-1 bg-surface-container-high h-3/4 rounded-t-lg transition-all hover:bg-primary/20"></div>
+<div class="flex-1 bg-surface-container-high h-2/5 rounded-t-lg transition-all hover:bg-primary/20"></div>
+<div class="flex-1 bg-surface-container-high h-4/5 rounded-t-lg transition-all hover:bg-primary/20"></div>
+<div class="flex-1 bg-primary/40 h-full rounded-t-lg border-x border-t border-primary/30 relative">
+<div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary shadow-lg shadow-primary/20"></div>
+</div>
+<div class="flex-1 bg-surface-container-high h-3/4 rounded-t-lg transition-all hover:bg-primary/20"></div>
+</div>
+</div>
+<!-- PR Streak & Volume Sidebar -->
+<div class="md:col-span-4 space-y-4">
+<div class="bg-surface-container p-6 rounded-xl flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 bg-tertiary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<span class="text-primary font-bold text-2xl">12</span>
+</div>
+<div>
+<span class="label-sm uppercase tracking-[0.05em] text-on-tertiary-container font-bold">PR Streak</span>
+<p class="text-on-surface-variant text-sm mt-1">Weeks of continuous gain</p>
+</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">fitness_center</span>
+</div>
+<span class="text-on-surface font-bold text-2xl">42.8k</span>
+</div>
+<div>
+<span class="label-sm uppercase tracking-[0.05em] text-on-secondary-container font-bold">Total Volume</span>
+<p class="text-on-surface-variant text-sm mt-1">Liters lifted this month</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Body Measurements: High-End Grid -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-2xl font-bold tracking-tight text-[#dfe2eb]">Body Composition</h3>
+<p class="text-on-secondary-container text-sm">Last updated: 2 days ago</p>
+</div>
+<button class="text-primary text-sm font-semibold hover:underline">Update stats</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Waist -->
+<div class="bg-surface-container-low p-6 rounded-xl transition-all hover:bg-surface-container">
+<div class="flex justify-between items-center mb-4">
+<span class="label-sm uppercase tracking-widest font-bold text-on-secondary-container">Waist</span>
+<div class="flex items-center gap-1 text-error text-xs font-bold bg-error-container/20 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+                            0.5%
+                        </div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold tracking-tighter">82.4</span>
+<span class="text-on-surface-variant text-sm">cm</span>
+</div>
+</div>
+<!-- Chest -->
+<div class="bg-surface-container-low p-6 rounded-xl transition-all hover:bg-surface-container">
+<div class="flex justify-between items-center mb-4">
+<span class="label-sm uppercase tracking-widest font-bold text-on-secondary-container">Chest</span>
+<div class="flex items-center gap-1 text-primary text-xs font-bold bg-primary-container/20 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                            1.2%
+                        </div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold tracking-tighter">104.2</span>
+<span class="text-on-surface-variant text-sm">cm</span>
+</div>
+</div>
+<!-- Thighs -->
+<div class="bg-surface-container-low p-6 rounded-xl transition-all hover:bg-surface-container">
+<div class="flex justify-between items-center mb-4">
+<span class="label-sm uppercase tracking-widest font-bold text-on-secondary-container">Thighs</span>
+<div class="flex items-center gap-1 text-on-surface-variant text-xs font-bold bg-surface-container-high px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">horizontal_rule</span>
+                            0%
+                        </div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold tracking-tighter">58.0</span>
+<span class="text-on-surface-variant text-sm">cm</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Performance Insights: Matte Card Layering -->
+<section class="bg-surface-container-low rounded-xl overflow-hidden">
+<div class="p-8">
+<h3 class="text-2xl font-bold tracking-tight text-[#dfe2eb] mb-8">Performance Insights</h3>
+<div class="space-y-4">
+<!-- Data Row 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-high/50 rounded-lg group transition-colors hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Explosive Power</p>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider">Top 5% of your age group</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-primary font-bold">94/100</p>
+<div class="w-24 h-1 bg-surface-container-highest mt-1 rounded-full overflow-hidden">
+<div class="w-[94%] h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Data Row 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-high/50 rounded-lg group transition-colors hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">timer</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Recovery Rate</p>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider">Improving weekly</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-primary font-bold">82/100</p>
+<div class="w-24 h-1 bg-surface-container-highest mt-1 rounded-full overflow-hidden">
+<div class="w-[82%] h-full bg-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#1c2026]/80 backdrop-blur-xl shadow-2xl tonal-shift">
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold mt-1">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">accessibility_new</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold mt-1">Muscles</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#3f4755] text-[#b8c3ff] rounded-2xl px-4 py-2 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold mt-1">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb] transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold mt-1">AI Coach</span>
+</a>
+</nav>
+</body></html>

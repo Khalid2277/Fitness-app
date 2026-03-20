@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#947f68",
+                        "error-container": "#93000a",
+                        "on-primary-fixed-variant": "#0035be",
+                        "on-surface-variant": "#c5c6cc",
+                        "surface-container-lowest": "#0a0e14",
+                        "primary": "#b8c3ff",
+                        "inverse-primary": "#124af0",
+                        "on-secondary-container": "#adb5c6",
+                        "tertiary": "#dbc2a9",
+                        "on-secondary-fixed": "#141c28",
+                        "tertiary-fixed": "#f9dec3",
+                        "on-tertiary-fixed-variant": "#554430",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#dbc2a9",
+                        "on-secondary": "#29313e",
+                        "surface-container": "#1c2026",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#241707",
+                        "primary-container": "#001151",
+                        "on-primary-fixed": "#001356",
+                        "surface-variant": "#31353c",
+                        "secondary-container": "#3f4755",
+                        "secondary-fixed-dim": "#bfc7d7",
+                        "secondary": "#bfc7d7",
+                        "on-tertiary-fixed": "#261909",
+                        "background": "#10141a",
+                        "on-tertiary": "#3d2e1c",
+                        "surface-bright": "#353940",
+                        "surface-dim": "#10141a",
+                        "outline-variant": "#45474c",
+                        "surface-tint": "#b8c3ff",
+                        "surface-container-highest": "#31353c",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#3f4755",
+                        "outline": "#8f9096",
+                        "on-primary": "#002388",
+                        "surface-container-low": "#181c22",
+                        "primary-fixed": "#dde1ff",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "on-primary-container": "#5777ff",
+                        "on-surface": "#dfe2eb",
+                        "on-background": "#dfe2eb",
+                        "surface": "#10141a",
+                        "secondary-fixed": "#dbe3f4",
+                        "surface-container-high": "#262a31",
+                        "inverse-on-surface": "#2d3137",
+                        "inverse-surface": "#dfe2eb"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .comparison-slider {
+            position: relative;
+            overflow: hidden;
+        }
+        .comparison-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: #b8c3ff;
+            cursor: ew-resize;
+            z-index: 10;
+        }
+        .comparison-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: #1c2026;
+            border: 2px solid #b8c3ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(184, 195, 255, 0.3);
+        }
+        body {
+            background-color: #10141a;
+            color: #dfe2eb;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#1c2026]/70 backdrop-blur-lg docked full-width top-0 z-50 flex justify-between items-center w-full px-6 py-4 shadow-[0_32px_64px_-5px_rgba(223,226,235,0.04)] font-['Plus_Jakarta_Sans'] antialiased tracking-tight">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close up of a athletic woman profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh5AI7UofmlIvccBW4XdZSeqbAgMO20YZEtgrAqlprsHDTPNXru8QpLlx53xcVQBa7CNdLZXZqjV7EFoqYiiqgkMBzU4ja7NVYvLiSmnuGwldYLxcU543G62sHktttZDqfIWXnpQCNA01jhU7fjFOx5z7Rtfx7OOqAKlianTetUgydDYu1wrBu57v_1k3bdZt-BkPYc7goEtRuYg07GaU4KsxUxgaknlFfxSFhMxpPQCAR3tirqPg7BowN_nq5sgWAbOV43VR0rNI"/>
+</div>
+<span class="text-lg font-bold tracking-tighter text-[#dfe2eb]">AlfaTechLabs Fitness</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#adb5c6] hover:bg-[#31353c] transition-colors p-2 rounded-lg">notifications</button>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 pt-10 space-y-12">
+<!-- Hero Section: Comparison Slider -->
+<section class="space-y-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="label-sm uppercase tracking-[0.05em] font-semibold text-primary mb-2 block">Transformation View</span>
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface">Visual Progress</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-xl">
+<button class="px-4 py-2 rounded-lg bg-surface-variant text-on-surface text-sm font-medium">Monthly</button>
+<button class="px-4 py-2 rounded-lg text-on-secondary-container text-sm font-medium hover:text-on-surface transition-colors">Quarterly</button>
+</div>
+</div>
+<!-- Bento Card: The Comparison Tool -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div class="lg:col-span-8 relative rounded-3xl overflow-hidden aspect-[4/3] bg-surface-container shadow-2xl group">
+<div class="absolute inset-0 flex">
+<!-- After Image -->
+<div class="w-full h-full">
+<img alt="After" class="w-full h-full object-cover" data-alt="Full body shot of a fit male athlete from front" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG1GBGpIpEFz80WhO1waV-nEFoiicEHMyQmT_U2WGYy4vkCGRn3c4MrxyaUbSJQz7Esvhu2gt_vQsweXUC7WHZ6Ze0PtK1r2yp5QKygJxh6p4p12f8RJ6os2KkZ5-Lt1QSuwxtemVFUgqrxEmazWBpzawZk7km9ykLqsq5rLGKU9gwTNewnr3X-3AUMnZkMyJekyR-EK34vCkir260wGzUGR76dbglx0EV4j-5Lb1yN1UF7AoygvEiB-Lf66RltO7-m3Q9JGHWxkQ"/>
+<div class="absolute bottom-8 right-8 bg-surface-container/60 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest text-primary">OCT 2023</div>
+</div>
+</div>
+<!-- Before Image (Clipped) -->
+<div class="absolute inset-0 w-1/2 overflow-hidden border-r-2 border-primary">
+<img alt="Before" class="w-[200%] h-full object-cover max-w-none" data-alt="Full body shot of a man starting his fitness journey" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALf_EVF5MLSNl9EIC8L6RVAOIPm_2PqAFCvApA_pxV-IPwjkThiHE-wq1r4dmbCfiWps-ES-04M1FtGDCb1RbapYP6oABM1AQJpXMw7jhCEb1SX_wKCo9_ujqBOVUzQqTHh5H_oB_U66t1-fxpgYNRQwvRXuBG7gPQw2ZR5rLrgrs0Rh2qYVLJFEG6yoWolURaZU_xiWyPBU09Ds2-7TlQPNpXHxb--PaGQEmqcyE6Yn6blBOgo2a2weu5z3lXplRo1LL0-lGXyDc"/>
+<div class="absolute bottom-8 left-8 bg-surface-container/60 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest text-on-secondary-container">JAN 2023</div>
+</div>
+<!-- Handle -->
+<div class="absolute top-0 bottom-0 left-1/2 -ml-[1px] w-[2px] bg-primary z-10">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-surface-container border-2 border-primary rounded-full flex items-center justify-center shadow-xl">
+<span class="material-symbols-outlined text-primary text-sm">unfold_more</span>
+</div>
+</div>
+</div>
+<!-- Bento Card: Insight -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-container-low rounded-3xl p-8 flex-1 flex flex-col justify-between">
+<div>
+<span class="text-on-tertiary-container font-semibold label-sm uppercase tracking-wider block mb-4">Composition Insight</span>
+<p class="text-2xl font-bold text-on-surface leading-tight">Lean mass increased by 4.2% since January.</p>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-on-secondary-container">Confidence Score</span>
+<span class="text-sm font-bold text-primary">92%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[92%]"></div>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary-fixed text-on-primary-fixed font-bold py-5 rounded-2xl flex items-center justify-center gap-3 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add_a_photo</span>
+                        New Entry
+                    </button>
+</div>
+</div>
+</section>
+<!-- Capture Section: Required Angles -->
+<section class="space-y-6">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-2xl font-bold tracking-tight text-on-surface">Update Progress</h2>
+<p class="text-on-secondary-container text-sm">Follow the framing guides for consistent results.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<!-- Angle Card: Front -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container rounded-3xl overflow-hidden relative mb-4">
+<img alt="Front" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" data-alt="Fitness silhouette front view placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjJ6qDZNVAVXtcSS6ke3bpaRl5xyo6RNj6g7MvbKoHnIZ4athpuTZIxT0Zps7KdUXzChX3Dua1dbYCmNGVNcmvcGPdsLfFO369rYkwQC0geL9v-TPl357MjRUD3kHGZRrj6hhDWJcrSx3najyo-5gSNsNLiPhSrEYkp4OXqpewFBTk0u1jc2HohfjxwJ5O95FbDV-iX8RiARMSvrw_093M-V1uFkrfivZOZDDzLVfo8d3_EiFzPCaUIeVvvA3U_PvBDHFweyR1a64"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+<div class="w-14 h-14 rounded-full bg-surface-container-high/80 backdrop-blur-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">add</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface">Front View</span>
+</div>
+</div>
+</div>
+<!-- Angle Card: Side -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container rounded-3xl overflow-hidden relative mb-4">
+<img alt="Side" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" data-alt="Fitness silhouette side view placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC05ze_JyIQhVu4ptkXl1xRKBQf2dWZuLBp-A7ajOnaTXVj0_CcyXd9LhFqh3FymxwLk4PVVcheXy8H7lxq-6Q3oQra-NN6RSImp-eURKQwf8rvKHdpwJ_YZKDI4o3o9O3XapEX_aNbll7MgJMddPogQB6H-conCwjlX2dcWhpVToMybHrjIm5aP1s2zLxaPyeMoqZHP_jWd1-K-EOnm5FYcO3jZMm92uWoZyEAZZlKfe7JpQ9DYJpakNdZM_MFnFYILLADoa9MdE8"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+<div class="w-14 h-14 rounded-full bg-surface-container-high/80 backdrop-blur-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">add</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface">Side View</span>
+</div>
+</div>
+</div>
+<!-- Angle Card: Back -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container rounded-3xl overflow-hidden relative mb-4">
+<img alt="Back" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" data-alt="Fitness silhouette back view placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC_o03lQkZfyKoxLeQ45oPPNGHwqUSOIYYdzWXSLGyg4Rx5ipkjeBLXBgWJIk1HE49uFLr3gU7BkSd1hgd9SnhOOfHiM9iWQn9n_K9pJ9u7U3qvCd0A9VvsQB-IUKVsxANh3D6HN9ZXhz-VqMVfyWvXoYbtYoW7OGy-DqTXVWUWWPNPA_1aQG3AG7HT7HMFgrC2c7KkkH4n8_FIMweEaJ0Swa9NKemNO7o65xCviwZF5VmKekORpiKLhHgiDXLeCIeKermIYfu19o"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+<div class="w-14 h-14 rounded-full bg-surface-container-high/80 backdrop-blur-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">add</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface">Back View</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline View -->
+<section class="space-y-6">
+<h2 class="text-2xl font-bold tracking-tight text-on-surface">Timeline</h2>
+<div class="space-y-4">
+<!-- Timeline Item -->
+<div class="flex items-center gap-6 p-4 bg-surface-container-low rounded-2xl hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-20 h-20 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Progress" class="w-full h-full object-cover" data-alt="Small progress photo thumbnail of a man training" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3c-imd0vlcoMDhNL_SPuoDqvszZhhFko8XIAL86YTC1rj3YTQRLfRkTJAiB54cgL3_8afbiwfIVkuhHUtb0WChG4j2nrExFAhESl34vB1KYpQ4EplCwWlyvAnjrFSeUIZ18qrOb8rLT9yf4R0SUfqPJEbkVuHpspE2V0l5QN7WISi2tVEdja1csBBZHugLXy9vZ96pMq-z648luIfeqBAqr-Cj-6xZV8qfynJQngBVVGZBeWjyrcopL-HI8oyswyw4IyV_CBJpUs"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface">September 2023</h4>
+<p class="text-sm text-on-secondary-container">3 Photos · 184.2 lbs · 12.4% Body Fat</p>
+</div>
+<span class="material-symbols-outlined text-[#adb5c6] group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Timeline Item -->
+<div class="flex items-center gap-6 p-4 bg-surface-container-low rounded-2xl hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-20 h-20 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Progress" class="w-full h-full object-cover" data-alt="Small progress photo thumbnail of a man at the gym" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsPuEsFGU8RWeAwKWoQPF--ToIEMiBIWDywQr724cAmY0D9n6z2bge1gkRRdsa-x_vlmhJh0rh0q-ogCf9-IjuBhyVpx5_-yzPTx-O_PzYEpZPwYu-oIycx0rVt3PuRru-oCGdIvHLtJN9dK56brrxWBwjSr-AUeepset1DeIsZb_DpUgDy2s0YlJ0uOdYG3NUoKskImkUrAin6jlyquW6UnFFHz3wA2HR2NfohMgFJGSI_wfm4AVZ-RAs_fK1-SrsvTRYDyejepU"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface">August 2023</h4>
+<p class="text-sm text-on-secondary-container">3 Photos · 186.5 lbs · 13.1% Body Fat</p>
+</div>
+<span class="material-symbols-outlined text-[#adb5c6] group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Timeline Item -->
+<div class="flex items-center gap-6 p-4 bg-surface-container-low rounded-2xl hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-20 h-20 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Progress" class="w-full h-full object-cover" data-alt="Progress photo thumbnail of a man lifting weights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHNPw2niL-AQ1zih4Fy4zYWs-Y0K8T1uING5nLM33kDh1DwXx3CUkOfdQMbebF_VAeZ4vHmfSlieKBrdp_vVjCLeLyKGGzMFXM1NanvL0l4CPiy96orv3JLq3xykmKbU5LLgALDL65I_qgVPGQph4XCdg9QAzYvnJvR5ZPYDm3zHWC7pdefrFE6bcGKjkUIIgyShk3tjdSvxRQg47VKkpcuQTgkMRn37mzShGbilKz4RrUeJnu2tAdlXQiCefeCvczMKqaCQ5kA_U"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface">July 2023</h4>
+<p class="text-sm text-on-secondary-container">2 Photos · 188.0 lbs · 13.8% Body Fat</p>
+</div>
+<span class="material-symbols-outlined text-[#adb5c6] group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<button class="w-full py-4 text-sm font-bold text-primary hover:bg-primary/5 transition-colors rounded-2xl border border-dashed border-outline-variant/30">
+                Show Archive
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#1c2026]/80 backdrop-blur-xl tonal-shift bg-[#181c22] shadow-2xl rounded-t-3xl font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.05em] font-semibold">
+<div class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb]">
+<span class="material-symbols-outlined mb-1">home</span>
+<span>Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb]">
+<span class="material-symbols-outlined mb-1">fitness_center</span>
+<span>Workouts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb]">
+<span class="material-symbols-outlined mb-1">accessibility_new</span>
+<span>Muscles</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#3f4755] text-[#b8c3ff] rounded-2xl px-4 py-2 transition-all">
+<span class="material-symbols-outlined mb-1">insights</span>
+<span>Progress</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#adb5c6] px-4 py-2 hover:text-[#dfe2eb]">
+<span class="material-symbols-outlined mb-1">smart_toy</span>
+<span>AI Coach</span>
+</div>
+</nav>
+</body></html>

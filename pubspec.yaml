@@ -1,0 +1,75 @@
+name: alfanutrition
+description: "AlfaNutrition - Premium fitness tracking app"
+publish_to: 'none'
+version: 1.2.0+5
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # State Management
+  flutter_riverpod: ^2.6.1
+
+  # Local Storage
+  hive_flutter: ^1.1.0
+  hive: ^2.2.3
+
+  # Navigation
+  go_router: ^14.8.1
+
+  # Charts
+  fl_chart: ^0.70.2
+
+  # UI
+  flutter_svg: ^2.0.17
+  percent_indicator: ^4.2.3
+  shimmer: ^3.0.0
+  flutter_animate: ^4.5.2
+
+  # Photo / File
+  image_picker: ^1.1.2
+  path_provider: ^2.1.5
+
+  # Backend
+  supabase_flutter: ^2.8.4
+
+  # Environment
+  flutter_dotenv: ^5.2.1
+
+  # Apple Sign-In
+  sign_in_with_apple: ^6.1.4
+  crypto: ^3.0.6
+
+  # Utilities
+  uuid: ^4.5.1
+  intl: ^0.20.2
+  url_launcher: ^6.3.1
+  collection: ^1.19.1
+  http: ^1.3.0
+
+  # Health Integration
+  health: ^13.3.1
+
+  # Food Database
+  openfoodfacts: ^3.30.2
+  mobile_scanner: ^6.0.2
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
+    - assets/
+    - assets/icons/
+    - assets/images/
