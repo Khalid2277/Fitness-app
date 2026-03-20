@@ -702,7 +702,7 @@ class _EmptyDayState extends StatelessWidget {
               borderRadius: AppSpacing.borderRadiusPill,
             ),
             child: ElevatedButton(
-              onPressed: () => context.push('/active-workout'),
+              onPressed: () => context.push('/log-workout'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,

@@ -7,6 +7,7 @@ import 'package:alfanutrition/data/repositories/nutrition_repository.dart';
 import 'package:alfanutrition/data/supabase/data_source.dart';
 import 'package:alfanutrition/data/supabase/supabase_providers.dart';
 import 'package:alfanutrition/features/profile/providers/profile_providers.dart';
+import 'package:alfanutrition/features/workouts/providers/workout_providers.dart';
 
 export 'package:alfanutrition/data/models/enums.dart' show MealType;
 
@@ -116,6 +117,39 @@ Meal _mealFromRepoMap(Map<String, dynamic> m) {
     notes: m['notes'] as String?,
   );
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Burned calories (estimated from workout duration on the selected date)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Estimates calories burned from workouts on the selected date.
+///
+/// Uses ~6 kcal/min for strength training as a reasonable average.
+/// This is an approximation — actual burn depends on body weight,
+/// intensity, exercise type, etc.
+final burnedCaloriesProvider = Provider<int>((ref) {
+  final date = ref.watch(selectedDateProvider);
+  final historyAsync = ref.watch(workoutHistoryProvider);
+  return historyAsync.when(
+    data: (workouts) {
+      final dayWorkouts = workouts.where((w) {
+        return w.date.year == date.year &&
+            w.date.month == date.month &&
+            w.date.day == date.day &&
+            w.isCompleted;
+      });
+      if (dayWorkouts.isEmpty) return 0;
+      final totalMinutes = dayWorkouts.fold<int>(
+        0,
+        (sum, w) => sum + w.duration.inMinutes,
+      );
+      // ~6 kcal/min is a common estimate for moderate strength training
+      return (totalMinutes * 6).round();
+    },
+    loading: () => 0,
+    error: (_, _) => 0,
+  );
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Quick food presets

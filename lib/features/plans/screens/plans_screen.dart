@@ -105,12 +105,6 @@ class PlansScreen extends ConsumerWidget {
                         .slideY(begin: -0.05, duration: 400.ms),
                     const SizedBox(height: AppSpacing.xxl),
 
-                    // ── Generate CTA ──────────────────────────────────────
-                    _GeneratePlanCTA(
-                      onTap: () => context.push('/generate-plan'),
-                    ),
-                    const SizedBox(height: AppSpacing.xxl),
-
                     // ── Section header ──
                     Row(
                       children: [
@@ -163,6 +157,22 @@ class PlansScreen extends ConsumerWidget {
                   ],
                 ),
               ),
+            ),
+
+            // ── Generate CTA (only when plans exist) ─────────────────
+            plansAsync.maybeWhen(
+              data: (plans) => plans.isNotEmpty
+                  ? SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                            AppSpacing.xl, 0, AppSpacing.xl, AppSpacing.xl),
+                        child: _GeneratePlanCTA(
+                          onTap: () => context.push('/generate-plan'),
+                        ),
+                      ),
+                    )
+                  : const SliverToBoxAdapter(child: SizedBox.shrink()),
+              orElse: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
             ),
 
             // ── Plan List ───────────────────────────────────────────────

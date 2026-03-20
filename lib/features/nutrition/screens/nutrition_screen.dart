@@ -22,6 +22,7 @@ class NutritionScreen extends ConsumerWidget {
   static const _proteinColor = AppColors.primaryBlue;
   static const _carbsColor = AppColors.accent;
   static const _fatsColor = AppColors.warning;
+  static const _fiberColor = AppColors.success;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -141,9 +142,10 @@ class NutritionScreen extends ConsumerWidget {
                 ),
               ),
               data: (nutrition) {
+                final burned = ref.watch(burnedCaloriesProvider);
                 final remaining =
-                    (nutrition.targetCalories - nutrition.totalCalories)
-                        .clamp(0.0, nutrition.targetCalories);
+                    (nutrition.targetCalories + burned - nutrition.totalCalories)
+                        .clamp(0.0, nutrition.targetCalories + burned);
 
                 return SliverList(
                   delegate: SliverChildListDelegate([
@@ -200,7 +202,7 @@ class NutritionScreen extends ConsumerWidget {
                                 ),
                                 _CalorieStatColumn(
                                   label: 'Burned',
-                                  value: 0,
+                                  value: burned,
                                   icon: Icons.directions_run_rounded,
                                   color: AppColors.error,
                                   isDark: isDark,
@@ -286,6 +288,17 @@ class NutritionScreen extends ConsumerWidget {
                               current: nutrition.totalFats,
                               target: nutrition.targetFats,
                               color: _fatsColor,
+                              isDark: isDark,
+                              theme: theme,
+                            ),
+                            const SizedBox(height: AppSpacing.lg),
+
+                            // Fiber
+                            _MacroRow(
+                              label: 'Fiber',
+                              current: nutrition.totalFiber,
+                              target: 30,
+                              color: _fiberColor,
                               isDark: isDark,
                               theme: theme,
                             ),

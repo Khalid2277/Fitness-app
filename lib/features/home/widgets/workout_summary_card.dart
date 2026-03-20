@@ -118,9 +118,9 @@ class WorkoutSummaryCard extends StatelessWidget {
           ],
         ),
         child: ElevatedButton.icon(
-          onPressed: () => context.push('/active-workout'),
-          icon: const Icon(Icons.play_arrow_rounded, size: 20),
-          label: const Text('START WORKOUT'),
+          onPressed: () => context.push('/log-workout'),
+          icon: const Icon(Icons.edit_note_rounded, size: 20),
+          label: const Text('LOG WORKOUT'),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,

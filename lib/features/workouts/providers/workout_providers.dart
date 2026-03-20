@@ -292,6 +292,75 @@ class ActiveWorkoutNotifier extends StateNotifier<ActiveWorkoutState?> {
   }
 }
 
+// ─────────────────────────── Selected Workout Date ───────────────────────────
+
+/// Currently selected date in the workout diary.
+final selectedWorkoutDateProvider = StateProvider<DateTime>((ref) {
+  final now = DateTime.now();
+  return DateTime(now.year, now.month, now.day);
+});
+
+/// Workouts for the selected date.
+final workoutsForDateProvider = Provider<List<Workout>>((ref) {
+  final date = ref.watch(selectedWorkoutDateProvider);
+  final historyAsync = ref.watch(workoutHistoryProvider);
+  return historyAsync.when(
+    data: (workouts) => workouts.where((w) {
+      return w.date.year == date.year &&
+          w.date.month == date.month &&
+          w.date.day == date.day;
+    }).toList(),
+    loading: () => [],
+    error: (_, _) => [],
+  );
+});
+
+/// Daily workout summary for the selected date.
+class DailyWorkoutSummary {
+  final int workoutCount;
+  final int totalSets;
+  final double totalVolume;
+  final int totalDurationSeconds;
+  final Set<MuscleGroup> musclesHit;
+
+  const DailyWorkoutSummary({
+    required this.workoutCount,
+    required this.totalSets,
+    required this.totalVolume,
+    required this.totalDurationSeconds,
+    required this.musclesHit,
+  });
+
+  String get formattedDuration {
+    final d = Duration(seconds: totalDurationSeconds);
+    final h = d.inHours;
+    final m = d.inMinutes.remainder(60);
+    if (h > 0) return '${h}h ${m}m';
+    return '${m}m';
+  }
+}
+
+final dailyWorkoutSummaryProvider = Provider<DailyWorkoutSummary>((ref) {
+  final workouts = ref.watch(workoutsForDateProvider);
+  if (workouts.isEmpty) {
+    return const DailyWorkoutSummary(
+      workoutCount: 0,
+      totalSets: 0,
+      totalVolume: 0,
+      totalDurationSeconds: 0,
+      musclesHit: {},
+    );
+  }
+  return DailyWorkoutSummary(
+    workoutCount: workouts.length,
+    totalSets: workouts.fold(0, (s, w) => s + w.totalSets),
+    totalVolume: workouts.fold(0.0, (s, w) => s + w.totalVolume),
+    totalDurationSeconds: workouts.fold(0, (s, w) => s + w.durationSeconds),
+    musclesHit: workouts.fold<Set<MuscleGroup>>(
+        {}, (s, w) => s..addAll(w.musclesHit)),
+  );
+});
+
 // ─────────────────────────── Single Workout Lookup ───────────────────────────
 
 final workoutByIdProvider =

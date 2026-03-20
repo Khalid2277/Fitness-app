@@ -738,9 +738,9 @@ class _TodaysWorkoutCard extends StatelessWidget {
                 ],
               ),
               child: ElevatedButton.icon(
-                onPressed: () => context.push('/active-workout'),
-                icon: const Icon(Icons.play_arrow_rounded, size: 20),
-                label: const Text('START WORKOUT'),
+                onPressed: () => context.push('/log-workout'),
+                icon: const Icon(Icons.edit_note_rounded, size: 20),
+                label: const Text('LOG WORKOUT'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
@@ -807,7 +807,7 @@ class _TodaysWorkoutCard extends StatelessWidget {
               ],
             ),
             child: ElevatedButton.icon(
-              onPressed: () => context.push('/active-workout'),
+              onPressed: () => context.push('/log-workout'),
               icon: const Icon(Icons.play_arrow_rounded, size: 20),
               label: const Text('FREESTYLE WORKOUT'),
               style: ElevatedButton.styleFrom(
@@ -1202,10 +1202,10 @@ class _QuickActionsSection extends StatelessWidget {
                   Expanded(
                     child: _QuickActionTile(
                       icon: Icons.fitness_center_rounded,
-                      label: 'Start Workout',
+                      label: 'Log Workout',
                       subtitle: 'Hit the gym',
                       color: AppColors.primaryBlue,
-                      onTap: () => context.push('/active-workout'),
+                      onTap: () => context.push('/log-workout'),
                       index: 1,
                     ),
                   ),

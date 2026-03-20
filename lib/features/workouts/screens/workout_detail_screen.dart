@@ -449,7 +449,7 @@ class WorkoutDetailScreen extends ConsumerWidget {
         primaryMuscle: exercise.primaryMuscle,
       );
     }
-    context.push('/active-workout');
+    context.push('/log-workout');
   }
 
   Future<void> _deleteWorkout(

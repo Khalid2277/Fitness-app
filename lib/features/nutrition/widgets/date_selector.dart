@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:alfanutrition/core/theme/app_colors.dart';
 import 'package:alfanutrition/core/theme/app_spacing.dart';
 import 'package:alfanutrition/features/nutrition/providers/nutrition_providers.dart';
 
-/// Horizontal scrollable date picker showing 7 days centered on today.
+/// Horizontal scrollable date picker with unlimited past history.
+///
+/// Shows 365 days into the past and 1 day into the future, scrolled to
+/// today on first build. Users can scroll freely through all dates.
 class DateSelector extends ConsumerStatefulWidget {
   const DateSelector({super.key});
 
@@ -15,16 +18,38 @@ class DateSelector extends ConsumerStatefulWidget {
 }
 
 class _DateSelectorState extends ConsumerState<DateSelector> {
+  /// How many past days to show. Effectively unlimited history.
+  static const int _pastDays = 365;
+
+  /// How many future days to show (today + 1 tomorrow).
+  static const int _futureDays = 1;
+
+  static const int _totalDays = _pastDays + 1 + _futureDays; // +1 for today
+  static const int _todayIndex = _pastDays;
+
+  static const double _itemWidth = 50.0;
+  static const double _itemSpacing = 8.0; // AppSpacing.sm
+
   late final ScrollController _scrollController;
-  late final List<DateTime> _dates;
+  late final DateTime _baseDate; // today
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
     final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    _dates = List.generate(7, (i) => today.add(Duration(days: i - 3)));
+    _baseDate = DateTime(now.year, now.month, now.day);
+
+    // Calculate initial offset to center today in the viewport.
+    // We approximate: center = todayIndex * (itemWidth + spacing) - viewportWidth/2 + itemWidth/2
+    // Use a post-frame callback for accurate centering with real viewport width.
+    _scrollController = ScrollController(
+      initialScrollOffset: _todayIndex * (_itemWidth + _itemSpacing) -
+          100, // rough center, refined below
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToDate(ref.read(selectedDateProvider));
+    });
   }
 
   @override
@@ -33,13 +58,43 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
     super.dispose();
   }
 
+  DateTime _dateAtIndex(int index) {
+    return _baseDate.add(Duration(days: index - _todayIndex));
+  }
+
   bool _isSameDay(DateTime a, DateTime b) {
     return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
   bool _isToday(DateTime date) {
-    final now = DateTime.now();
-    return _isSameDay(date, DateTime(now.year, now.month, now.day));
+    return _isSameDay(date, _baseDate);
+  }
+
+  void _scrollToDate(DateTime date) {
+    final diff = date.difference(_baseDate).inDays;
+    final index = _todayIndex + diff;
+    if (index < 0 || index >= _totalDays) return;
+    if (!_scrollController.hasClients) return;
+
+    final viewportWidth = _scrollController.position.viewportDimension;
+    final targetOffset =
+        index * (_itemWidth + _itemSpacing) - (viewportWidth / 2) + (_itemWidth / 2);
+    final clampedOffset = targetOffset.clamp(
+      _scrollController.position.minScrollExtent,
+      _scrollController.position.maxScrollExtent,
+    );
+
+    _scrollController.animateTo(
+      clampedOffset,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  /// Whether a new month starts at this index (show month label).
+  bool _isFirstOfMonth(int index) {
+    final date = _dateAtIndex(index);
+    return date.day == 1;
   }
 
   @override
@@ -54,23 +109,44 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
         controller: _scrollController,
         scrollDirection: Axis.horizontal,
         padding: AppSpacing.screenPadding,
-        itemCount: _dates.length,
-        separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
+        itemCount: _totalDays,
+        separatorBuilder: (_, index) {
+          // Add month divider when crossing month boundaries
+          if (index + 1 < _totalDays && _isFirstOfMonth(index + 1)) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Center(
+                child: Container(
+                  width: 1,
+                  height: 32,
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : AppColors.dividerLight,
+                ),
+              ),
+            );
+          }
+          return const SizedBox(width: AppSpacing.sm);
+        },
         itemBuilder: (context, index) {
-          final date = _dates[index];
+          final date = _dateAtIndex(index);
           final isSelected = _isSameDay(date, selectedDate);
           final isToday = _isToday(date);
           final dayName = DateFormat('EEE').format(date);
           final dayNum = date.day.toString();
+          final isFuture = date.isAfter(_baseDate.add(const Duration(days: 1)));
 
           return GestureDetector(
-            onTap: () {
-              ref.read(selectedDateProvider.notifier).state = date;
-            },
+            onTap: isFuture
+                ? null
+                : () {
+                    HapticFeedback.selectionClick();
+                    ref.read(selectedDateProvider.notifier).state = date;
+                  },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
-              width: 50,
+              width: _itemWidth,
               decoration: BoxDecoration(
                 color: isSelected
                     ? AppColors.primaryBlue
@@ -91,52 +167,52 @@ class _DateSelectorState extends ConsumerState<DateSelector> {
                                 : AppColors.dividerLight,
                       ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    dayName.toUpperCase(),
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: isSelected
-                          ? theme.colorScheme.onPrimary.withValues(alpha: 0.8)
-                          : isDark
-                              ? AppColors.textTertiaryDark
-                              : AppColors.textTertiaryLight,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 10,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.xs),
-                  Text(
-                    dayNum,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: isSelected
-                          ? theme.colorScheme.onPrimary
-                          : theme.colorScheme.onSurface,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  if (isToday) ...[
-                    const SizedBox(height: AppSpacing.xs),
-                    Container(
-                      width: 5,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
+              child: Opacity(
+                opacity: isFuture ? 0.3 : 1.0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      dayName.toUpperCase(),
+                      style: theme.textTheme.labelSmall?.copyWith(
                         color: isSelected
-                            ? theme.colorScheme.onPrimary
-                            : AppColors.primaryBlue,
+                            ? theme.colorScheme.onPrimary.withValues(alpha: 0.8)
+                            : isDark
+                                ? AppColors.textTertiaryDark
+                                : AppColors.textTertiaryLight,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10,
+                        letterSpacing: 0.5,
                       ),
                     ),
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      dayNum,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: isSelected
+                            ? theme.colorScheme.onPrimary
+                            : theme.colorScheme.onSurface,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    if (isToday) ...[
+                      const SizedBox(height: AppSpacing.xs),
+                      Container(
+                        width: 5,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isSelected
+                              ? theme.colorScheme.onPrimary
+                              : AppColors.primaryBlue,
+                        ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
-          ).animate().fadeIn(
-                duration: 300.ms,
-                delay: (50 * index).ms,
-              );
+          );
         },
       ),
     );

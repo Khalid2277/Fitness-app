@@ -679,7 +679,7 @@ class _PlanDetailScreenState extends ConsumerState<PlanDetailScreen> {
                             exercises: exercises,
                             onStartWorkout: () {
                               // Navigate to active workout
-                              context.push('/active-workout');
+                              context.push('/log-workout');
                             },
                             delay:
                                 Duration(milliseconds: 100 * index),
@@ -727,7 +727,7 @@ class _PlanDetailScreenState extends ConsumerState<PlanDetailScreen> {
                     ),
                   ),
                   child: GestureDetector(
-                    onTap: () => context.push('/active-workout'),
+                    onTap: () => context.push('/log-workout'),
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(
@@ -751,7 +751,7 @@ class _PlanDetailScreenState extends ConsumerState<PlanDetailScreen> {
                               size: 24, color: Colors.white),
                           const SizedBox(width: AppSpacing.sm),
                           Text(
-                            'Start Workout',
+                            'Log Workout',
                             style: theme.textTheme.titleMedium?.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,

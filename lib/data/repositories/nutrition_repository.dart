@@ -69,26 +69,26 @@ class NutritionRepository {
   }
 
   /// Compute daily nutrition totals for the given date.
-  /// Returns a map with keys: calories, protein, carbs, fat.
+  /// Returns a map with keys: calories, protein, carbs, fats.
   Future<Map<String, double>> getDailyTotals(DateTime date) async {
     final meals = await getMealsForDate(date);
     double calories = 0;
     double protein = 0;
     double carbs = 0;
-    double fat = 0;
+    double fats = 0;
 
     for (final meal in meals) {
       calories += (meal['calories'] as num?)?.toDouble() ?? 0;
       protein += (meal['protein'] as num?)?.toDouble() ?? 0;
       carbs += (meal['carbs'] as num?)?.toDouble() ?? 0;
-      fat += (meal['fat'] as num?)?.toDouble() ?? 0;
+      fats += (meal['fats'] as num? ?? meal['fat'] as num? ?? 0).toDouble();
     }
 
     return {
       'calories': calories,
       'protein': protein,
       'carbs': carbs,
-      'fat': fat,
+      'fats': fats,
     };
   }
 }

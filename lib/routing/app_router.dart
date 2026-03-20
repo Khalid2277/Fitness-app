@@ -8,6 +8,8 @@ import 'package:alfanutrition/features/home/screens/home_screen.dart';
 import 'package:alfanutrition/features/workouts/screens/workouts_screen.dart';
 import 'package:alfanutrition/features/workouts/screens/workout_detail_screen.dart';
 import 'package:alfanutrition/features/workouts/screens/active_workout_screen.dart';
+import 'package:alfanutrition/features/workouts/screens/log_workout_screen.dart';
+import 'package:alfanutrition/data/models/workout.dart';
 import 'package:alfanutrition/data/models/meal.dart';
 import 'package:alfanutrition/features/nutrition/screens/nutrition_screen.dart';
 import 'package:alfanutrition/features/nutrition/screens/add_meal_screen.dart';
@@ -125,7 +127,25 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/active-workout',
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state) => const ActiveWorkoutScreen(),
+      builder: (context, state) {
+        // Support passing a Workout for editing
+        final workout = state.extra;
+        if (workout is Workout) {
+          return LogWorkoutScreen(editingWorkout: workout);
+        }
+        return const LogWorkoutScreen();
+      },
+    ),
+    GoRoute(
+      path: '/log-workout',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final workout = state.extra;
+        if (workout is Workout) {
+          return LogWorkoutScreen(editingWorkout: workout);
+        }
+        return const LogWorkoutScreen();
+      },
     ),
     GoRoute(
       path: '/add-meal',
